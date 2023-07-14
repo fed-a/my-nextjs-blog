@@ -1,0 +1,23 @@
+{
+  "management": "Менеджмент",
+  "marketing": "Маркетинг",
+  "tilda": "Tilda",
+  "react": "React",
+  "angular": "Angular",
+  "nextjs": "Next.js",
+  "other": "Другое",
+  "effector": "Effector",
+  "typescript": "TypeScript",
+  "javascript": "JavaScript",
+  "css": "CSS",
+  "html": "HTML",
+  "sass": "SASS/SCSS",
+  "tailwind": "Tailwind",
+  "design": "Design",
+  "ux": "UX",
+  "webDesign": "Веб-дизайн",
+  "ui": "UI",
+  "algorithms": "Алгоритмы",
+  "selfImprovement": "Саморазвитие",
+  "immigration": "Иммиграция"
+}

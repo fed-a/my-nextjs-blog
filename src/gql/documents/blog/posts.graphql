@@ -1,0 +1,74 @@
+query Posts(
+  $filters: PostFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+  $locale: I18NLocaleCode
+) {
+  posts(filters: $filters, pagination: $pagination, sort: $sort, locale: $locale) {
+    data {
+      id
+      attributes {
+        title
+        description
+        metaTitle
+        slug
+        locale
+        thumbnail {
+          ...ImageFragment
+        }
+        timeToRead
+        publishedAt
+        tags
+        difficulty
+        reactionLikes {
+          data {
+            attributes {
+              userHash
+            }
+          }
+        }
+        reactionFires {
+          data {
+            attributes {
+              userHash
+            }
+          }
+        }
+        reactionHearts {
+          data {
+            attributes {
+              userHash
+            }
+          }
+        }
+        reactionTears {
+          data {
+            attributes {
+              userHash
+            }
+          }
+        }
+        reactionAngries {
+          data {
+            attributes {
+              userHash
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment ImageFragment on UploadFileEntityResponse {
+  data {
+    attributes {
+      name
+      alternativeText
+      formats
+      url
+      width
+      height
+    }
+  }
+}

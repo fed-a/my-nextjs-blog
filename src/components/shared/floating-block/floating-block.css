@@ -1,0 +1,8 @@
+.af-floating-block {
+  @apply pointer-events-none fixed left-[100%];
+  transition: opacity 0.5s ease-in-out;
+}
+
+.af-floating-block--center {
+  transform: translateX(-50%) translateY(-50%);
+}

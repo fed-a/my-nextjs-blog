@@ -1,0 +1,16 @@
+query Menu($locale: I18NLocaleCode) {
+  menu(locale: $locale) {
+    data {
+      id
+      attributes {
+        items(sort: ["id"]) {
+          id
+          order
+          title
+          href
+        }
+        locale
+      }
+    }
+  }
+}

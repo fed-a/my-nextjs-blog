@@ -1,0 +1,81 @@
+query Post($filters: PostFiltersInput, $locale: I18NLocaleCode) {
+  posts(filters: $filters, locale: $locale) {
+    data {
+      id
+      attributes {
+        title
+        description
+        metaTitle
+        slug
+        locale
+        thumbnail {
+          ...ImageFragment
+        }
+        content {
+          __typename
+          ... on ComponentDynamicContentText {
+            id
+            text
+          }
+          ... on ComponentDynamicContentImage {
+            id
+            media {
+              ...ImageFragment
+            }
+          }
+        }
+        timeToRead
+        publishedAt
+        tags
+        reactionLikes {
+          data {
+            attributes {
+              userHash
+            }
+          }
+        }
+        reactionFires {
+          data {
+            attributes {
+              userHash
+            }
+          }
+        }
+        reactionHearts {
+          data {
+            attributes {
+              userHash
+            }
+          }
+        }
+        reactionTears {
+          data {
+            attributes {
+              userHash
+            }
+          }
+        }
+        reactionAngries {
+          data {
+            attributes {
+              userHash
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment ImageFragment on UploadFileEntityResponse {
+  data {
+    attributes {
+      name
+      alternativeText
+      formats
+      url
+      width
+      height
+    }
+  }
+}

@@ -1,0 +1,71 @@
+query Landing($locale: I18NLocaleCode) {
+  blog(locale: $locale) {
+    data {
+      id
+      attributes {
+        title
+        tip
+        lastPostsTitle
+        locale
+      }
+    }
+  }
+  about(locale: $locale) {
+    data {
+      id
+      attributes {
+        title
+        myStack
+        stackImages(sort: ["id"]) {
+          id
+          order
+          iconName
+        }
+        workExp(sort: ["id"]) {
+          id
+          order
+          workName
+          from
+          to
+          objectives
+        }
+        locale
+      }
+    }
+  }
+  hero(locale: $locale) {
+    data {
+      id
+      attributes {
+        name
+        toContacts
+        toWorks
+        down
+        consoleTexts {
+          id
+          openCommand
+          asciiImage
+        }
+        socialLinks {
+          id
+          iconName
+        }
+      }
+    }
+  }
+  project(locale: $locale) {
+    data {
+      id
+      attributes {
+        title
+        projects {
+          id
+          name
+          hrefSource
+          hrefPreview
+        }
+        locale
+      }
+    }
+  }
+}

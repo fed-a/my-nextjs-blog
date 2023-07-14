@@ -1,0 +1,23 @@
+{
+  "management": "Ledning",
+  "marketing": "Marknadsföring",
+  "tilda": "Tilda",
+  "react": "React",
+  "angular": "Angular",
+  "nextjs": "Next.js",
+  "other": "Andra",
+  "effector": "Effektor",
+  "typescript": "TypeScript",
+  "javascript": "JavaScript",
+  "css": "CSS",
+  "html": "HTML",
+  "sass": "SASS/SCSS",
+  "tailwind": "Medvind",
+  "design": "Design",
+  "ux": "UX",
+  "webDesign": "Webbdesign",
+  "ui": "UI",
+  "algorithms": "Algoritmer",
+  "selfImprovement": "Egen utveckling",
+  "immigration": "Invandring"
+}

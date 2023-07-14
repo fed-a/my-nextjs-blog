@@ -1,0 +1,75 @@
+.af-markdown__code {
+  @apply m-auto w-full overflow-hidden rounded-[0.5rem] shadow;
+}
+
+.code__topbar {
+  @apply relative h-8 bg-[var(--md-bg)];
+}
+
+.code__topbar span {
+  @apply absolute top-[0.7rem] block h-[0.8rem] w-[0.8rem] rounded-full;
+}
+
+.code__topbar span:nth-child(1) {
+  @apply left-[1rem] bg-[#ff5f5a];
+}
+.code__topbar span:nth-child(2) {
+  @apply left-[2.25rem] bg-[#ffbf2f];
+}
+.code__topbar span:nth-child(3) {
+  @apply left-[3.5rem] bg-[#2acb44];
+}
+
+@media screen and (min-width: 768px) {
+  .af-markdown__code {
+    width: 42rem;
+  }
+}
+
+@media screen and (min-width: 976px) {
+  .af-markdown__code {
+    width: 48rem;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .af-markdown__code {
+    width: 56rem;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .af-markdown__code {
+    width: 64rem;
+  }
+}
+
+/* _________________ */
+/* _____COLORS______ */
+/* _________________ */
+
+.af-markdown_component {
+  --md-color: #383a42;
+  --md-bg: rgba(255, 255, 255, 0.25);
+  --md-comment: #a0a1a7;
+  --md-tag: #a626a4;
+  --md-section: #e45649;
+  --md-literal: #0184bb;
+  --md-string: #50a14f;
+  --md-title: #c18401;
+  --md-attr: #986801;
+  --md-symbol: #4078f2;
+}
+
+[data-theme='dark'] .af-markdown_component {
+  --md-color: #abb2bf;
+  --md-bg: rgba(40, 40, 52, 0.25);
+  --md-comment: #5c6370;
+  --md-tag: #c678dd;
+  --md-section: #e06c75;
+  --md-literal: #56b6c2;
+  --md-string: #98c379;
+  --md-title: #e6c07b;
+  --md-attr: #d19a66;
+  --md-symbol: #61aeee;
+}

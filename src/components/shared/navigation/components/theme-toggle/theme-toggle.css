@@ -1,0 +1,8 @@
+.theme-toggle {
+  @apply h-5 w-5 bg-[url('/assets/icons/sun.svg')] icon;
+  filter: invert(37%) sepia(100%) saturate(7098%) hue-rotate(221deg) brightness(104%) contrast(91%);
+}
+
+[data-theme='dark'] .theme-toggle {
+  @apply bg-[url('/assets/icons/moon-stars.svg')];
+}

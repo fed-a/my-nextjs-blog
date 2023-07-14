@@ -1,0 +1,12 @@
+.difficulty_apprentice {
+  @apply text-white dark:text-black;
+}
+.difficulty_adept {
+  @apply text-[#1881EC];
+}
+.difficulty_master {
+  @apply text-[#DE25EC];
+}
+.difficulty_expert {
+  @apply text-[#E68C06] dark:text-[#ECAD11];
+}

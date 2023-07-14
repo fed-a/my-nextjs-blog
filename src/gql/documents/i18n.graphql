@@ -1,0 +1,10 @@
+query Localization {
+  i18NLocales {
+    data {
+      attributes {
+        name
+        code
+      }
+    }
+  }
+}
