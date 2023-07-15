@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function AboutPage() {
+export default async function AboutPage() {
   return <div>AboutPage</div>;
 }

@@ -23,6 +23,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   }).catch(() => null);
 
   const data = post?.data?.posts?.data?.[0]?.attributes ?? null;
+
   return (
     <div className="container md:px-12 lg:px-28 xl:px-40 2xl:px-48">
       <PostContent data={data} />

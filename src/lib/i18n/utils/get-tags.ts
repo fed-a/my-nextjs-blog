@@ -3,9 +3,6 @@ import { TAGS_FIELDS } from '../types';
 
 export async function getTags(locale: Locale): Promise<Record<string, string>> {
   const [
-    management,
-    marketing,
-    tilda,
     react,
     angular,
     nextjs,
@@ -21,18 +18,12 @@ export async function getTags(locale: Locale): Promise<Record<string, string>> {
     ux,
     webDesign,
     ui,
-    algorithms,
-    selfImprovement,
-    immigration,
   ] = await getLocalization(
     locale,
     TAGS_FIELDS.map((field) => `tags.${field}` as const),
   );
 
   return {
-    management,
-    marketing,
-    tilda,
     react,
     angular,
     nextjs,
@@ -48,8 +39,5 @@ export async function getTags(locale: Locale): Promise<Record<string, string>> {
     ux,
     webDesign,
     ui,
-    algorithms,
-    selfImprovement,
-    immigration,
   };
 }

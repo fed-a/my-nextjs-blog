@@ -2,5 +2,8 @@
   "tags": "Etiketter",
   "sort": "Sortering",
   "heading": "I.T.-blogg",
-  "more": "Visa mer"
+  "more": "Visa mer",
+  "publishedAt:asc": "Gammal först",
+  "publishedAt:desc": "Ny första",
+  "popular:asc": "Populär först"
 }

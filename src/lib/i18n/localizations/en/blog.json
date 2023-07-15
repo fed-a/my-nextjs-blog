@@ -2,5 +2,8 @@
   "tags": "Tags",
   "sort": "Sorting",
   "heading": "Blog about I.T. stuff",
-  "more": "Show more"
+  "more": "Show more",
+  "publishedAt:asc": "Old First",
+  "publishedAt:desc": "New first",
+  "popular:asc": "Popular first"
 }

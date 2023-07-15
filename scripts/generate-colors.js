@@ -29,11 +29,6 @@ const createTypeFile = () => {
   return 'export type ColorName = ' + COLORS.join(' | ');
 };
 
-fs.writeFile(
-  path.join(__dirname, COLORS_DIRECTORY_PATH, COLORS_FILE_NAME),
-  createTypeFile(),
-  function (err) {
-    if (err) throw err;
-    console.log('Colors type file was created successfully.');
-  },
-);
+fs.writeFileSync(path.join(__dirname, COLORS_DIRECTORY_PATH, COLORS_FILE_NAME), createTypeFile());
+
+console.log('✨ Colors generated');

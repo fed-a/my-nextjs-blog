@@ -37,24 +37,15 @@ fs.readdirSync(path.join(__dirname, '../public' + ICONS_PATH)).forEach((file) =>
   CSS_FILE_CONTENT.push(getIconStyle(className, file));
 });
 
-fs.writeFile(
+fs.writeFileSync(
   path.join(__dirname, CSS_DIRECTORY_PATH, CSS_FILE_NAME),
   CSS_FILE_CONTENT.join(''),
-  function (err) {
-    if (err) throw err;
-    console.log('Css file was created successfully');
-  },
 );
 
 const createTypeFile = () => {
   return 'export type IconName = ' + TYPE_FILE_CONTENT.join(' | ');
 };
 
-fs.writeFile(
-  path.join(__dirname, TS_DIRECTORY_PATH, TS_FILE_NAME),
-  createTypeFile(),
-  function (err) {
-    if (err) throw err;
-    console.log('Type file was created successfully.');
-  },
-);
+fs.writeFileSync(path.join(__dirname, TS_DIRECTORY_PATH, TS_FILE_NAME), createTypeFile());
+
+console.log('✨ Icons generated');

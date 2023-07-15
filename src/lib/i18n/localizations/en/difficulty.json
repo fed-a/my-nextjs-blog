@@ -1,6 +1,6 @@
 {
-  "apprentice": "Ученик",
-  "adept": "Адепт",
-  "expert": "Эксперт",
-  "master": "Мастер"
+  "apprentice": "Apprentice",
+  "adept": "Adept",
+  "expert": "Expert",
+  "master": "Master"
 }

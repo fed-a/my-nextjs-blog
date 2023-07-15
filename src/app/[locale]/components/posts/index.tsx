@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { usePostsQuery } from '@/gql/graphql';
 import { Localed } from '@/types/params';
@@ -16,6 +16,11 @@ interface PostProps {
 
 export function Posts({ locale, localization }: Localed<PostProps>) {
   const { data, loading, error } = usePostsQuery({ variables: { locale } });
+
+  useEffect(() => {
+    console.log('mounted');
+  }, []);
+
   if (loading) {
     return (
       <>

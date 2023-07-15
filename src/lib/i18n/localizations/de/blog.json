@@ -2,5 +2,8 @@
   "tags": "Tags",
   "sort": "Sortieren",
   "heading": "I.T.-Blog",
-  "more": "Mehr anzeigen"
+  "more": "Mehr anzeigen",
+  "publishedAt:asc": "Alte Erste",
+  "publishedAt:desc": "Neue Erste",
+  "popular:asc": "Beliebter Erster"
 }

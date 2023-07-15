@@ -1,4 +1,12 @@
-const BLOG_FIELDS = ['tags', 'sort', 'heading', 'more'] as const;
+const BLOG_FIELDS = [
+  'tags',
+  'sort',
+  'heading',
+  'more',
+  'publishedAt:asc',
+  'publishedAt:desc',
+  'popular:asc',
+] as const;
 
 const DIFFICULTY_FIELDS = ['apprentice', 'adept', 'expert', 'master'] as const;
 
@@ -36,9 +44,9 @@ const POST_FIELDS = [
 ] as const;
 
 export const TAGS_FIELDS = [
-  'management',
-  'marketing',
-  'tilda',
+  // 'management',
+  // 'marketing',
+  // 'tilda',
   'react',
   'angular',
   'nextjs',
@@ -54,9 +62,9 @@ export const TAGS_FIELDS = [
   'ux',
   'webDesign',
   'ui',
-  'algorithms',
-  'selfImprovement',
-  'immigration',
+  // 'algorithms',
+  // 'selfImprovement',
+  // 'immigration',
 ] as const;
 
 const LOCALIZATION_FIELDS = {

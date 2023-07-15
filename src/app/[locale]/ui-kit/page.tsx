@@ -13,10 +13,11 @@ import {
   UiKitTypography,
 } from './components';
 
-export default function UiKit() {
+export default async function UiKit() {
   if (process.env.NODE_ENV !== 'development') {
     notFound();
   }
+
   return (
     <div className="flex flex-col gap-4">
       <Typography type="h1">Типографика</Typography>

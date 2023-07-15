@@ -1,7 +1,7 @@
 import { PostQueryResult } from '@/gql/graphql';
 
 export type PostType = NonNullable<
-  NonNullable<NonNullable<PostQueryResult['data']>['post']>['data']
+  NonNullable<NonNullable<PostQueryResult['data']>['posts']>['data'][number]
 >['attributes'];
 
 export type ContentType = NonNullable<PostType>['content'];
