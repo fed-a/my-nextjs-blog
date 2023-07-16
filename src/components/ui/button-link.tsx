@@ -10,7 +10,7 @@ type ButtonLinkProps = Omit<ButtonProps, 'onClick'> & {
   locale: Locale;
 };
 
-export function ButtonLink(props: ButtonLinkProps) {
+function ButtonLinkComponent(props: ButtonLinkProps) {
   const { href, locale } = props;
   return (
     <Link href={href} locale={locale}>
@@ -18,3 +18,5 @@ export function ButtonLink(props: ButtonLinkProps) {
     </Link>
   );
 }
+
+export const ButtonLink = React.memo(ButtonLinkComponent);

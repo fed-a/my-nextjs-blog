@@ -395,7 +395,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = About | Blog | ComponentDynamicContentImage | ComponentDynamicContentText | ComponentLandingImageName | ComponentLandingMenuItem | ComponentLandingProjectExample | ComponentLandingSocialLink | ComponentLandingTypingText | ComponentLandingWorkExp | ComponentSharedMetaSocial | ComponentSharedSeo | Hero | I18NLocale | Menu | Post | Project | ReactionAngry | ReactionFire | ReactionHeart | ReactionLike | ReactionTear | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = About | Blog | ComponentDynamicContentImage | ComponentDynamicContentText | ComponentLandingImageName | ComponentLandingMenuItem | ComponentLandingProjectExample | ComponentLandingSocialLink | ComponentLandingTypingText | ComponentLandingWorkExp | ComponentSharedMetaSocial | ComponentSharedSeo | Hero | I18NLocale | Menu | Post | Project | ReactionAngry | ReactionFire | ReactionHeart | ReactionLike | ReactionTear | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Hero = {
   __typename?: 'Hero';
@@ -558,6 +558,15 @@ export type JsonFilterInput = {
   startsWith?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type LikesResponse = {
+  __typename?: 'LikesResponse';
+  angries: Scalars['Int']['output'];
+  fires: Scalars['Int']['output'];
+  hearts: Scalars['Int']['output'];
+  likes: Scalars['Int']['output'];
+  tears: Scalars['Int']['output'];
+};
+
 export type Menu = {
   __typename?: 'Menu';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -609,6 +618,7 @@ export type Mutation = {
   createReactionHeart?: Maybe<ReactionHeartEntityResponse>;
   createReactionLike?: Maybe<ReactionLikeEntityResponse>;
   createReactionTear?: Maybe<ReactionTearEntityResponse>;
+  createTagLocalization?: Maybe<TagEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Create a new role */
@@ -724,6 +734,13 @@ export type MutationCreateReactionLikeArgs = {
 
 export type MutationCreateReactionTearArgs = {
   data: ReactionTearInput;
+};
+
+
+export type MutationCreateTagLocalizationArgs = {
+  data?: InputMaybe<TagInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
 
@@ -921,18 +938,14 @@ export type Post = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   description: Scalars['String']['output'];
   difficulty: Enum_Post_Difficulty;
+  likes?: Maybe<LikesResponse>;
   locale?: Maybe<Scalars['String']['output']>;
   localizations?: Maybe<PostRelationResponseCollection>;
   metaTitle: Scalars['String']['output'];
   postId?: Maybe<Scalars['String']['output']>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  reactionAngries?: Maybe<ReactionAngryRelationResponseCollection>;
-  reactionFires?: Maybe<ReactionFireRelationResponseCollection>;
-  reactionHearts?: Maybe<ReactionHeartRelationResponseCollection>;
-  reactionLikes?: Maybe<ReactionLikeRelationResponseCollection>;
-  reactionTears?: Maybe<ReactionTearRelationResponseCollection>;
   slug: Scalars['String']['output'];
-  tags?: Maybe<Scalars['JSON']['output']>;
+  tags?: Maybe<TagRelationResponseCollection>;
   thumbnail?: Maybe<UploadFileEntityResponse>;
   timeToRead: Scalars['Int']['output'];
   title: Scalars['String']['output'];
@@ -948,36 +961,8 @@ export type PostLocalizationsArgs = {
 };
 
 
-export type PostReactionAngriesArgs = {
-  filters?: InputMaybe<ReactionAngryFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type PostReactionFiresArgs = {
-  filters?: InputMaybe<ReactionFireFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type PostReactionHeartsArgs = {
-  filters?: InputMaybe<ReactionHeartFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type PostReactionLikesArgs = {
-  filters?: InputMaybe<ReactionLikeFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type PostReactionTearsArgs = {
-  filters?: InputMaybe<ReactionTearFiltersInput>;
+export type PostTagsArgs = {
+  filters?: InputMaybe<TagFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -1014,13 +999,8 @@ export type PostFiltersInput = {
   or?: InputMaybe<Array<InputMaybe<PostFiltersInput>>>;
   postId?: InputMaybe<StringFilterInput>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
-  reactionAngries?: InputMaybe<ReactionAngryFiltersInput>;
-  reactionFires?: InputMaybe<ReactionFireFiltersInput>;
-  reactionHearts?: InputMaybe<ReactionHeartFiltersInput>;
-  reactionLikes?: InputMaybe<ReactionLikeFiltersInput>;
-  reactionTears?: InputMaybe<ReactionTearFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
-  tags?: InputMaybe<JsonFilterInput>;
+  tags?: InputMaybe<TagFiltersInput>;
   timeToRead?: InputMaybe<IntFilterInput>;
   title?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
@@ -1033,13 +1013,8 @@ export type PostInput = {
   metaTitle?: InputMaybe<Scalars['String']['input']>;
   postId?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  reactionAngries?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  reactionFires?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  reactionHearts?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  reactionLikes?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  reactionTears?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   slug?: InputMaybe<Scalars['String']['input']>;
-  tags?: InputMaybe<Scalars['JSON']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   thumbnail?: InputMaybe<Scalars['ID']['input']>;
   timeToRead?: InputMaybe<Scalars['Int']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -1115,6 +1090,8 @@ export type Query = {
   reactionLikes?: Maybe<ReactionLikeEntityResponseCollection>;
   reactionTear?: Maybe<ReactionTearEntityResponse>;
   reactionTears?: Maybe<ReactionTearEntityResponseCollection>;
+  tag?: Maybe<TagEntityResponse>;
+  tags?: Maybe<TagEntityResponseCollection>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
   uploadFiles?: Maybe<UploadFileEntityResponseCollection>;
   uploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -1238,6 +1215,20 @@ export type QueryReactionTearsArgs = {
 };
 
 
+export type QueryTagArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
+
+export type QueryTagsArgs = {
+  filters?: InputMaybe<TagFiltersInput>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
 export type QueryUploadFileArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -1288,9 +1279,8 @@ export type QueryUsersPermissionsUsersArgs = {
 export type ReactionAngry = {
   __typename?: 'ReactionAngry';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  post?: Maybe<PostEntityResponse>;
+  postSlug: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  userHash?: Maybe<Scalars['String']['output']>;
 };
 
 export type ReactionAngryEntity = {
@@ -1316,27 +1306,21 @@ export type ReactionAngryFiltersInput = {
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<ReactionAngryFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ReactionAngryFiltersInput>>>;
-  post?: InputMaybe<PostFiltersInput>;
+  postSlug?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   userHash?: InputMaybe<StringFilterInput>;
 };
 
 export type ReactionAngryInput = {
-  post?: InputMaybe<Scalars['ID']['input']>;
+  postSlug?: InputMaybe<Scalars['String']['input']>;
   userHash?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ReactionAngryRelationResponseCollection = {
-  __typename?: 'ReactionAngryRelationResponseCollection';
-  data: Array<ReactionAngryEntity>;
 };
 
 export type ReactionFire = {
   __typename?: 'ReactionFire';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  post?: Maybe<PostEntityResponse>;
+  postSlug: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  userHash?: Maybe<Scalars['String']['output']>;
 };
 
 export type ReactionFireEntity = {
@@ -1362,27 +1346,21 @@ export type ReactionFireFiltersInput = {
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<ReactionFireFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ReactionFireFiltersInput>>>;
-  post?: InputMaybe<PostFiltersInput>;
+  postSlug?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   userHash?: InputMaybe<StringFilterInput>;
 };
 
 export type ReactionFireInput = {
-  post?: InputMaybe<Scalars['ID']['input']>;
+  postSlug?: InputMaybe<Scalars['String']['input']>;
   userHash?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ReactionFireRelationResponseCollection = {
-  __typename?: 'ReactionFireRelationResponseCollection';
-  data: Array<ReactionFireEntity>;
 };
 
 export type ReactionHeart = {
   __typename?: 'ReactionHeart';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  post?: Maybe<PostEntityResponse>;
+  postSlug: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  userHash?: Maybe<Scalars['String']['output']>;
 };
 
 export type ReactionHeartEntity = {
@@ -1408,27 +1386,21 @@ export type ReactionHeartFiltersInput = {
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<ReactionHeartFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ReactionHeartFiltersInput>>>;
-  post?: InputMaybe<PostFiltersInput>;
+  postSlug?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   userHash?: InputMaybe<StringFilterInput>;
 };
 
 export type ReactionHeartInput = {
-  post?: InputMaybe<Scalars['ID']['input']>;
+  postSlug?: InputMaybe<Scalars['String']['input']>;
   userHash?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ReactionHeartRelationResponseCollection = {
-  __typename?: 'ReactionHeartRelationResponseCollection';
-  data: Array<ReactionHeartEntity>;
 };
 
 export type ReactionLike = {
   __typename?: 'ReactionLike';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  post?: Maybe<PostEntityResponse>;
+  postSlug: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  userHash?: Maybe<Scalars['String']['output']>;
 };
 
 export type ReactionLikeEntity = {
@@ -1454,25 +1426,19 @@ export type ReactionLikeFiltersInput = {
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<ReactionLikeFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ReactionLikeFiltersInput>>>;
-  post?: InputMaybe<PostFiltersInput>;
+  postSlug?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   userHash?: InputMaybe<StringFilterInput>;
 };
 
 export type ReactionLikeInput = {
-  post?: InputMaybe<Scalars['ID']['input']>;
+  postSlug?: InputMaybe<Scalars['String']['input']>;
   userHash?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ReactionLikeRelationResponseCollection = {
-  __typename?: 'ReactionLikeRelationResponseCollection';
-  data: Array<ReactionLikeEntity>;
 };
 
 export type ReactionTear = {
   __typename?: 'ReactionTear';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  post?: Maybe<PostEntityResponse>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userHash?: Maybe<Scalars['String']['output']>;
 };
@@ -1500,19 +1466,12 @@ export type ReactionTearFiltersInput = {
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<ReactionTearFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ReactionTearFiltersInput>>>;
-  post?: InputMaybe<PostFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   userHash?: InputMaybe<StringFilterInput>;
 };
 
 export type ReactionTearInput = {
-  post?: InputMaybe<Scalars['ID']['input']>;
   userHash?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ReactionTearRelationResponseCollection = {
-  __typename?: 'ReactionTearRelationResponseCollection';
-  data: Array<ReactionTearEntity>;
 };
 
 export type ResponseCollectionMeta = {
@@ -1542,6 +1501,74 @@ export type StringFilterInput = {
   null?: InputMaybe<Scalars['Boolean']['input']>;
   or?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Tag = {
+  __typename?: 'Tag';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  label: Scalars['String']['output'];
+  locale?: Maybe<Scalars['String']['output']>;
+  localizations?: Maybe<TagRelationResponseCollection>;
+  posts?: Maybe<PostRelationResponseCollection>;
+  tagId: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type TagLocalizationsArgs = {
+  filters?: InputMaybe<TagFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type TagPostsArgs = {
+  filters?: InputMaybe<PostFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type TagEntity = {
+  __typename?: 'TagEntity';
+  attributes?: Maybe<Tag>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type TagEntityResponse = {
+  __typename?: 'TagEntityResponse';
+  data?: Maybe<TagEntity>;
+};
+
+export type TagEntityResponseCollection = {
+  __typename?: 'TagEntityResponseCollection';
+  data: Array<TagEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type TagFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<TagFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  label?: InputMaybe<StringFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<TagFiltersInput>;
+  not?: InputMaybe<TagFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<TagFiltersInput>>>;
+  posts?: InputMaybe<PostFiltersInput>;
+  tagId?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type TagInput = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  posts?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  tagId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TagRelationResponseCollection = {
+  __typename?: 'TagRelationResponseCollection';
+  data: Array<TagEntity>;
 };
 
 export type UploadFile = {
@@ -1923,7 +1950,7 @@ export type PostQueryVariables = Exact<{
 }>;
 
 
-export type PostQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, metaTitle: string, slug: string, locale?: string | null, timeToRead: number, publishedAt?: any | null, tags?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, formats?: any | null, url: string, width?: number | null, height?: number | null } | null } | null } | null, content: Array<{ __typename: 'ComponentDynamicContentImage', id: string, media: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, formats?: any | null, url: string, width?: number | null, height?: number | null } | null } | null } } | { __typename: 'ComponentDynamicContentText', id: string, text: string } | { __typename: 'Error' } | null>, reactionLikes?: { __typename?: 'ReactionLikeRelationResponseCollection', data: Array<{ __typename?: 'ReactionLikeEntity', attributes?: { __typename?: 'ReactionLike', userHash?: string | null } | null }> } | null, reactionFires?: { __typename?: 'ReactionFireRelationResponseCollection', data: Array<{ __typename?: 'ReactionFireEntity', attributes?: { __typename?: 'ReactionFire', userHash?: string | null } | null }> } | null, reactionHearts?: { __typename?: 'ReactionHeartRelationResponseCollection', data: Array<{ __typename?: 'ReactionHeartEntity', attributes?: { __typename?: 'ReactionHeart', userHash?: string | null } | null }> } | null, reactionTears?: { __typename?: 'ReactionTearRelationResponseCollection', data: Array<{ __typename?: 'ReactionTearEntity', attributes?: { __typename?: 'ReactionTear', userHash?: string | null } | null }> } | null, reactionAngries?: { __typename?: 'ReactionAngryRelationResponseCollection', data: Array<{ __typename?: 'ReactionAngryEntity', attributes?: { __typename?: 'ReactionAngry', userHash?: string | null } | null }> } | null } | null }> } | null };
+export type PostQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, metaTitle: string, slug: string, locale?: string | null, timeToRead: number, publishedAt?: any | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, formats?: any | null, url: string, width?: number | null, height?: number | null } | null } | null } | null, content: Array<{ __typename: 'ComponentDynamicContentImage', id: string, media: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, formats?: any | null, url: string, width?: number | null, height?: number | null } | null } | null } } | { __typename: 'ComponentDynamicContentText', id: string, text: string } | { __typename: 'Error' } | null>, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', id?: string | null, attributes?: { __typename?: 'Tag', tagId: string, label: string } | null }> } | null, likes?: { __typename?: 'LikesResponse', likes: number, fires: number, hearts: number, tears: number, angries: number } | null } | null }> } | null };
 
 export type ImageFragmentFragment = { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, formats?: any | null, url: string, width?: number | null, height?: number | null } | null } | null };
 
@@ -1935,7 +1962,14 @@ export type PostsQueryVariables = Exact<{
 }>;
 
 
-export type PostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, metaTitle: string, slug: string, locale?: string | null, timeToRead: number, publishedAt?: any | null, tags?: any | null, difficulty: Enum_Post_Difficulty, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, formats?: any | null, url: string, width?: number | null, height?: number | null } | null } | null } | null, reactionLikes?: { __typename?: 'ReactionLikeRelationResponseCollection', data: Array<{ __typename?: 'ReactionLikeEntity', attributes?: { __typename?: 'ReactionLike', userHash?: string | null } | null }> } | null, reactionFires?: { __typename?: 'ReactionFireRelationResponseCollection', data: Array<{ __typename?: 'ReactionFireEntity', attributes?: { __typename?: 'ReactionFire', userHash?: string | null } | null }> } | null, reactionHearts?: { __typename?: 'ReactionHeartRelationResponseCollection', data: Array<{ __typename?: 'ReactionHeartEntity', attributes?: { __typename?: 'ReactionHeart', userHash?: string | null } | null }> } | null, reactionTears?: { __typename?: 'ReactionTearRelationResponseCollection', data: Array<{ __typename?: 'ReactionTearEntity', attributes?: { __typename?: 'ReactionTear', userHash?: string | null } | null }> } | null, reactionAngries?: { __typename?: 'ReactionAngryRelationResponseCollection', data: Array<{ __typename?: 'ReactionAngryEntity', attributes?: { __typename?: 'ReactionAngry', userHash?: string | null } | null }> } | null } | null }> } | null };
+export type PostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, metaTitle: string, slug: string, locale?: string | null, timeToRead: number, publishedAt?: any | null, difficulty: Enum_Post_Difficulty, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, formats?: any | null, url: string, width?: number | null, height?: number | null } | null } | null } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', id?: string | null, attributes?: { __typename?: 'Tag', tagId: string, label: string } | null }> } | null, likes?: { __typename?: 'LikesResponse', likes: number, fires: number, hearts: number, tears: number, angries: number } | null } | null }> } | null };
+
+export type TagsQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+}>;
+
+
+export type TagsQuery = { __typename?: 'Query', tags?: { __typename: 'TagEntityResponseCollection', data: Array<{ __typename: 'TagEntity', attributes?: { __typename: 'Tag', tagId: string, label: string } | null }> } | null };
 
 export type LocalizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1948,13 +1982,6 @@ export type LandingQueryVariables = Exact<{
 
 
 export type LandingQuery = { __typename?: 'Query', blog?: { __typename?: 'BlogEntityResponse', data?: { __typename?: 'BlogEntity', id?: string | null, attributes?: { __typename?: 'Blog', title?: string | null, tip?: string | null, lastPostsTitle?: string | null, locale?: string | null } | null } | null } | null, about?: { __typename?: 'AboutEntityResponse', data?: { __typename?: 'AboutEntity', id?: string | null, attributes?: { __typename?: 'About', title: string, myStack: string, locale?: string | null, stackImages: Array<{ __typename?: 'ComponentLandingImageName', id: string, order?: number | null, iconName: string } | null>, workExp?: Array<{ __typename?: 'ComponentLandingWorkExp', id: string, order?: number | null, workName: string, from: string, to: string, objectives?: string | null } | null> | null } | null } | null } | null, hero?: { __typename?: 'HeroEntityResponse', data?: { __typename?: 'HeroEntity', id?: string | null, attributes?: { __typename?: 'Hero', name: string, toContacts: string, toWorks: string, down: string, consoleTexts?: Array<{ __typename?: 'ComponentLandingTypingText', id: string, openCommand: string, asciiImage?: string | null } | null> | null, socialLinks?: Array<{ __typename?: 'ComponentLandingSocialLink', id: string, iconName: string } | null> | null } | null } | null } | null, project?: { __typename?: 'ProjectEntityResponse', data?: { __typename?: 'ProjectEntity', id?: string | null, attributes?: { __typename?: 'Project', title: string, locale?: string | null, projects?: Array<{ __typename?: 'ComponentLandingProjectExample', id: string, name?: string | null, hrefSource?: string | null, hrefPreview?: string | null } | null> | null } | null } | null } | null };
-
-export type MenuQueryVariables = Exact<{
-  locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
-}>;
-
-
-export type MenuQuery = { __typename?: 'Query', menu?: { __typename?: 'MenuEntityResponse', data?: { __typename?: 'MenuEntity', id?: string | null, attributes?: { __typename?: 'Menu', locale?: string | null, items?: Array<{ __typename?: 'ComponentLandingMenuItem', id: string, order?: number | null, title: string, href: string } | null> | null } | null } | null } | null };
 
 export const ImageFragmentFragmentDoc = gql`
     fragment ImageFragment on UploadFileEntityResponse {
@@ -1999,41 +2026,21 @@ export const PostDocument = gql`
         }
         timeToRead
         publishedAt
-        tags
-        reactionLikes {
+        tags {
           data {
+            id
             attributes {
-              userHash
+              tagId
+              label
             }
           }
         }
-        reactionFires {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionHearts {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionTears {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionAngries {
-          data {
-            attributes {
-              userHash
-            }
-          }
+        likes {
+          likes
+          fires
+          hearts
+          tears
+          angries
         }
       }
     }
@@ -2085,42 +2092,22 @@ export const PostsDocument = gql`
         }
         timeToRead
         publishedAt
-        tags
         difficulty
-        reactionLikes {
+        tags {
           data {
+            id
             attributes {
-              userHash
+              tagId
+              label
             }
           }
         }
-        reactionFires {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionHearts {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionTears {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionAngries {
-          data {
-            attributes {
-              userHash
-            }
-          }
+        likes {
+          likes
+          fires
+          hearts
+          tears
+          angries
         }
       }
     }
@@ -2158,6 +2145,49 @@ export function usePostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Post
 export type PostsQueryHookResult = ReturnType<typeof usePostsQuery>;
 export type PostsLazyQueryHookResult = ReturnType<typeof usePostsLazyQuery>;
 export type PostsQueryResult = Apollo.QueryResult<PostsQuery, PostsQueryVariables>;
+export const TagsDocument = gql`
+    query Tags($locale: I18NLocaleCode) {
+  tags(locale: $locale, pagination: {start: 0, limit: 20}) {
+    __typename
+    data {
+      __typename
+      attributes {
+        __typename
+        tagId
+        label
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useTagsQuery__
+ *
+ * To run a query within a React component, call `useTagsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTagsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTagsQuery({
+ *   variables: {
+ *      locale: // value for 'locale'
+ *   },
+ * });
+ */
+export function useTagsQuery(baseOptions?: Apollo.QueryHookOptions<TagsQuery, TagsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return useQuery<TagsQuery, TagsQueryVariables>(TagsDocument, options);
+      }
+export function useTagsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TagsQuery, TagsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TagsQuery, TagsQueryVariables>(TagsDocument, options);
+        }
+export type TagsQueryHookResult = ReturnType<typeof useTagsQuery>;
+export type TagsLazyQueryHookResult = ReturnType<typeof useTagsLazyQuery>;
+export type TagsQueryResult = Apollo.QueryResult<TagsQuery, TagsQueryVariables>;
 export const LocalizationDocument = gql`
     query Localization {
   i18NLocales {
@@ -2298,49 +2328,3 @@ export function useLandingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<La
 export type LandingQueryHookResult = ReturnType<typeof useLandingQuery>;
 export type LandingLazyQueryHookResult = ReturnType<typeof useLandingLazyQuery>;
 export type LandingQueryResult = Apollo.QueryResult<LandingQuery, LandingQueryVariables>;
-export const MenuDocument = gql`
-    query Menu($locale: I18NLocaleCode) {
-  menu(locale: $locale) {
-    data {
-      id
-      attributes {
-        items(sort: ["id"]) {
-          id
-          order
-          title
-          href
-        }
-        locale
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useMenuQuery__
- *
- * To run a query within a React component, call `useMenuQuery` and pass it any options that fit your needs.
- * When your component renders, `useMenuQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMenuQuery({
- *   variables: {
- *      locale: // value for 'locale'
- *   },
- * });
- */
-export function useMenuQuery(baseOptions?: Apollo.QueryHookOptions<MenuQuery, MenuQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return useQuery<MenuQuery, MenuQueryVariables>(MenuDocument, options);
-      }
-export function useMenuLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MenuQuery, MenuQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MenuQuery, MenuQueryVariables>(MenuDocument, options);
-        }
-export type MenuQueryHookResult = ReturnType<typeof useMenuQuery>;
-export type MenuLazyQueryHookResult = ReturnType<typeof useMenuLazyQuery>;
-export type MenuQueryResult = Apollo.QueryResult<MenuQuery, MenuQueryVariables>;

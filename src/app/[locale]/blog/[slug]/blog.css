@@ -1,0 +1,13 @@
+.af-article .af-markdown {
+  @apply flex flex-col gap-8;
+}
+
+.af-article .af-markdown p {
+  @apply text-[1.3125rem] mt-8;
+  font-family: SourceSerifPro, serif;
+}
+
+.af-article .af-markdown figure,
+.af-article .af-markdown .af-markdown__code {
+  @apply mt-12;
+}

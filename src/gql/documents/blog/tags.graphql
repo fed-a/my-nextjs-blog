@@ -1,0 +1,13 @@
+query Tags($locale: I18NLocaleCode) {
+  tags(locale: $locale, pagination: { start: 0, limit: 20 }) {
+    __typename
+    data {
+      __typename
+      attributes {
+        __typename
+        tagId
+        label
+      }
+    }
+  }
+}

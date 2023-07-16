@@ -3,6 +3,7 @@ const BLOG_FIELDS = [
   'sort',
   'heading',
   'more',
+  'reset',
   'publishedAt:asc',
   'publishedAt:desc',
   'popular:asc',
@@ -43,36 +44,11 @@ const POST_FIELDS = [
   'difficulty',
 ] as const;
 
-export const TAGS_FIELDS = [
-  // 'management',
-  // 'marketing',
-  // 'tilda',
-  'react',
-  'angular',
-  'nextjs',
-  'other',
-  'effector',
-  'typescript',
-  'javascript',
-  'css',
-  'html',
-  'sass',
-  'tailwind',
-  'design',
-  'ux',
-  'webDesign',
-  'ui',
-  // 'algorithms',
-  // 'selfImprovement',
-  // 'immigration',
-] as const;
-
 const LOCALIZATION_FIELDS = {
   blog: BLOG_FIELDS,
   difficulty: DIFFICULTY_FIELDS,
   menu: MENU_FIELDS,
   post: POST_FIELDS,
-  tags: TAGS_FIELDS,
 };
 
 export type LocalizationModules = keyof typeof LOCALIZATION_FIELDS;

@@ -5,5 +5,7 @@
   "more": "Show more",
   "publishedAt:asc": "Old First",
   "publishedAt:desc": "New first",
-  "popular:asc": "Popular first"
+  "popular:asc": "Popular first",
+  "reset": "Reset",
+  "noPosts": "No posts with specified filters"
 }

@@ -26,41 +26,21 @@ query Post($filters: PostFiltersInput, $locale: I18NLocaleCode) {
         }
         timeToRead
         publishedAt
-        tags
-        reactionLikes {
+        tags {
           data {
+            id
             attributes {
-              userHash
+              tagId
+              label
             }
           }
         }
-        reactionFires {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionHearts {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionTears {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionAngries {
-          data {
-            attributes {
-              userHash
-            }
-          }
+        likes {
+          likes
+          fires
+          hearts
+          tears
+          angries
         }
       }
     }

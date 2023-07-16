@@ -18,42 +18,22 @@ query Posts(
         }
         timeToRead
         publishedAt
-        tags
         difficulty
-        reactionLikes {
+        tags {
           data {
+            id
             attributes {
-              userHash
+              tagId
+              label
             }
           }
         }
-        reactionFires {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionHearts {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionTears {
-          data {
-            attributes {
-              userHash
-            }
-          }
-        }
-        reactionAngries {
-          data {
-            attributes {
-              userHash
-            }
-          }
+        likes {
+          likes
+          fires
+          hearts
+          tears
+          angries
         }
       }
     }

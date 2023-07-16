@@ -1,4 +1,8 @@
-import { ContentBlock, ContentBlockImage, ContentBlockText } from '../types';
+import {
+  ContentBlock,
+  ContentBlockImage,
+  ContentBlockText,
+} from '../../../../types/app/blog/[slug]';
 
 export function isTextBlock(block: ContentBlock): block is ContentBlockText {
   return Boolean(block && block.__typename === 'ComponentDynamicContentText');

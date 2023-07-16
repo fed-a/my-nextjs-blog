@@ -12,8 +12,8 @@ import { getClient } from '../apollo/client';
 export async function fetchAPI<
   TData extends { data: any },
   TVariables extends OperationVariables = OperationVariables,
->(query: TypedDocumentNode<TData, TVariables>, variables?: TVariables) {
-  return getClient()
+>(query: TypedDocumentNode<TData, TVariables>, variables?: TVariables, client = getClient()) {
+  return client
     .query<TData['data'], TVariables>({
       query,
       variables,

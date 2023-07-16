@@ -42,7 +42,7 @@ export default async function RootLayout({
         <Providers>
           <div className="flex min-h-[100lvh] flex-col overflow-x-hidden">
             <Navigation locale={locale} />
-            <div className="af-wrapper">{children}</div>
+            <div className="flex-grow">{children}</div>
             <Footer locale={locale} />
           </div>
         </Providers>

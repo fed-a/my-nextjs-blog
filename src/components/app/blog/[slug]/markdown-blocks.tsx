@@ -2,8 +2,8 @@ import React from 'react';
 
 import { FormattedImage, Markdown } from '@/components/ui';
 
-import { isImageBlock, isTextBlock } from '../lib';
-import { ContentType } from '../types';
+import { isImageBlock, isTextBlock } from '../../../../lib/app/blog/[slug]';
+import { ContentType } from '../../../../types/app/blog/[slug]';
 
 interface MarkdownBlocksProps {
   content: ContentType | null;

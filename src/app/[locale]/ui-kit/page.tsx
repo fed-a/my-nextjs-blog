@@ -1,8 +1,6 @@
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-import { Typography } from '@/components/ui';
-
 import {
   UiKitBadge,
   UiKitButton,
@@ -11,7 +9,8 @@ import {
   UiKitSkeleton,
   UiKitTooltip,
   UiKitTypography,
-} from './components';
+} from '@/components/app/ui-kit';
+import { Typography } from '@/components/ui';
 
 export default async function UiKit() {
   if (process.env.NODE_ENV !== 'development') {

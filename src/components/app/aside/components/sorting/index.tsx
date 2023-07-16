@@ -1,12 +1,14 @@
 'use client';
 
-import { useUnit } from 'effector-react';
 import React, { useCallback } from 'react';
+
+import { useAppDispatch, useAppSelector } from '@/store';
+import { SelectMainPageFilter, setSorting } from '@/store/app';
+import { MAIN_PAGE_SORTING, MainPageSortings } from '@/types/app';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
 
-import { $mainPageSorting, setMainPageSorting } from '../../model';
-import { MAIN_PAGE_SORTING, MainPageSortings } from '../../types';
+import { useSSR } from '@/lib/hooks';
 
 interface MainPageSortingProps {
   localization: {
@@ -18,20 +20,22 @@ interface MainPageSortingProps {
 }
 
 export function MainPageSorting({ localization }: MainPageSortingProps) {
-  const [sorting, setSorting] = useUnit([$mainPageSorting, setMainPageSorting]);
+  const dispatch = useAppDispatch();
+  const { sorting } = useAppSelector(SelectMainPageFilter);
+  const { isServer } = useSSR();
   const { sort, publishedAtAsc, publishedAtDesc, popularAsc } = localization;
 
   const localedOptions = [publishedAtAsc, publishedAtDesc, popularAsc];
 
   const onChange = useCallback(
     (newSort: MainPageSortings) => {
-      setSorting(newSort);
+      dispatch(setSorting(newSort));
     },
-    [setSorting],
+    [dispatch],
   );
 
   return (
-    <Select value={sorting} onValueChange={onChange}>
+    <Select disabled={isServer} value={isServer ? undefined : sorting} onValueChange={onChange}>
       <SelectTrigger>
         <SelectValue suppressHydrationWarning placeholder={sort} />
       </SelectTrigger>

@@ -9,12 +9,16 @@ import { Localed } from '@/types/params';
 import { Difficulty, DifficultyLocalization, Reactions } from '@/components/shared';
 import { Badge, Icon, Typography } from '@/components/ui';
 
-import { getLocaledHref, getTimeInNaturalLanguage } from '@/lib/utils';
+import {
+  getLocaledHref,
+  getLocaledTimeAgo,
+  getLocaledTimeToRead,
+  getTimeInNaturalLanguage,
+} from '@/lib/utils';
 
 export interface PostCardLocalization {
   read: string;
   ago: string;
-  tags: Record<string, string>;
   timeUnits: TimeUnits;
 }
 
@@ -27,33 +31,26 @@ export interface PostCardProps {
 
 export function PostCard(props: Localed<PostCardProps>) {
   const { locale, localization, cardData } = props;
+  const { title, description, slug, tags, difficulty, publishedAt, likes, timeToRead } =
+    cardData?.attributes ?? {};
   const {
-    title,
-    description,
-    slug,
-    tags,
-    difficulty,
-    publishedAt,
-    reactionLikes,
-    reactionFires,
-    reactionHearts,
-    reactionTears,
-    reactionAngries,
-    timeToRead,
-  } = cardData?.attributes ?? {};
-  const { read, ago, timeUnits, tags: tagLocalizations } = localization;
+    likes: reactionLikes,
+    fires: reactionFires,
+    hearts: reactionHearts,
+    tears: reactionTears,
+    angries: reactionAngries,
+  } = likes ?? {};
+  const { read, ago, timeUnits } = localization;
 
-  const localedTimeToRead = useMemo(() => {
-    return `${getTimeInNaturalLanguage(timeToRead ?? 15, timeUnits)} ${read}`;
-  }, [read, timeToRead, timeUnits]);
+  const localedTimeToRead = useMemo(
+    () => getLocaledTimeToRead({ read, timeUnits, timeToRead }),
+    [read, timeToRead, timeUnits],
+  );
 
-  const localedTimeAgo = useMemo(() => {
-    const timeAgo = getTimeInNaturalLanguage(
-      Math.abs(differenceInMinutes(new Date(publishedAt), new Date())),
-      timeUnits,
-    );
-    return locale === 'de' ? `${ago} ${timeAgo}` : `${timeAgo} ${ago}`;
-  }, [ago, locale, publishedAt, timeUnits]);
+  const localedTimeAgo = useMemo(
+    () => getLocaledTimeAgo({ locale, ago, timeUnits, publishedAt }),
+    [ago, locale, publishedAt, timeUnits],
+  );
 
   return (
     <article>
@@ -62,8 +59,8 @@ export function PostCard(props: Localed<PostCardProps>) {
           <h2 className="pb-2 hover:underline text-5xl">{title}</h2>
         </Link>
         <div className="flex gap-x-3">
-          {tags.map((tag: string) => (
-            <Badge key={tag}>{tagLocalizations[tag] ?? tag}</Badge>
+          {tags?.data.map((tag) => (
+            <Badge key={tag.attributes?.tagId}>{tag.attributes?.label}</Badge>
           ))}
         </div>
         <p>{description}</p>
@@ -83,11 +80,11 @@ export function PostCard(props: Localed<PostCardProps>) {
         </div>
         <div>
           <Reactions
-            likes={reactionLikes?.data.length ?? 0}
-            fires={reactionFires?.data.length ?? 0}
-            hearts={reactionHearts?.data.length ?? 0}
-            tears={reactionTears?.data.length ?? 0}
-            angries={reactionAngries?.data.length ?? 0}
+            likes={reactionLikes ?? 0}
+            fires={reactionFires ?? 0}
+            hearts={reactionHearts ?? 0}
+            tears={reactionTears ?? 0}
+            angries={reactionAngries ?? 0}
           />
         </div>
       </div>

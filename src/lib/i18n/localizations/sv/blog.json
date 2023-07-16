@@ -5,5 +5,7 @@
   "more": "Visa mer",
   "publishedAt:asc": "Gammal först",
   "publishedAt:desc": "Ny första",
-  "popular:asc": "Populär först"
+  "popular:asc": "Populär först",
+  "reset": "Återställ",
+  "noPosts": "Inga inlägg med angivna filter"
 }

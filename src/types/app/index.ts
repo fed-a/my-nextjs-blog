@@ -1,9 +1,15 @@
 export interface MainPageFilters {
   tags: string[];
-  difficulty: string | null;
+  difficulty: 'apprentice' | 'adept' | 'expert' | 'master' | null;
+  sorting: MainPageSortings;
 }
 
-export const MAIN_PAGE_SORTING = [
+interface SortingValue {
+  id: MainPageSortings;
+  value: string[];
+}
+
+export const MAIN_PAGE_SORTING: SortingValue[] = [
   {
     id: 'publishedAt:asc',
     value: ['publishedAt:asc'],
@@ -22,6 +28,6 @@ export const MAIN_PAGE_SORTING = [
       'reactionAngries:asc',
     ],
   },
-] as const;
+];
 
-export type MainPageSortings = (typeof MAIN_PAGE_SORTING)[number]['id'];
+export type MainPageSortings = 'publishedAt:asc' | 'publishedAt:desc' | 'pupular:asc';
