@@ -1,14 +1,3 @@
-export interface MainPageFilters {
-  tags: string[];
-  difficulty: 'apprentice' | 'adept' | 'expert' | 'master' | null;
-  sorting: MainPageSortings;
-}
-
-interface SortingValue {
-  id: MainPageSortings;
-  value: string[];
-}
-
 export const MAIN_PAGE_SORTING: SortingValue[] = [
   {
     id: 'publishedAt:asc',
@@ -31,3 +20,14 @@ export const MAIN_PAGE_SORTING: SortingValue[] = [
 ];
 
 export type MainPageSortings = 'publishedAt:asc' | 'publishedAt:desc' | 'pupular:asc';
+
+export interface MainPageFilters {
+  tags: string[];
+  difficulty: 'apprentice' | 'adept' | 'expert' | 'master' | null;
+  sorting: MainPageSortings;
+}
+
+interface SortingValue {
+  id: MainPageSortings;
+  value: string[];
+}

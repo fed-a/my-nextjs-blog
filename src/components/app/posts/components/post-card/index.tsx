@@ -1,4 +1,3 @@
-import { differenceInMinutes } from 'date-fns';
 import Link from 'next/link';
 import React, { useMemo } from 'react';
 
@@ -9,12 +8,7 @@ import { Localed } from '@/types/params';
 import { Difficulty, DifficultyLocalization, Reactions } from '@/components/shared';
 import { Badge, Icon, Typography } from '@/components/ui';
 
-import {
-  getLocaledHref,
-  getLocaledTimeAgo,
-  getLocaledTimeToRead,
-  getTimeInNaturalLanguage,
-} from '@/lib/utils';
+import { getLocaledHref, getLocaledTimeAgo, getLocaledTimeToRead } from '@/lib/utils';
 
 export interface PostCardLocalization {
   read: string;
