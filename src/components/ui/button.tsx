@@ -16,7 +16,7 @@ const buttonVariants = cva(
         secondary:
           'bg-opacity-0 text-blue-500 hover:bg-blue-500/30 disabled:bg-opacity-0 disabled:text-blue-500 disabled:text-opacity-50 dark:disabled:text-gray-200',
         link: 'text-primary underline-offset-4 hover:underline',
-        tag: 'border border-primary text-primary hover:text-white hover:border-blue-500 hover:bg-blue-500',
+        tag: 'border border-input text-primary hover:text-white hover:border-blue-500 hover:bg-blue-500',
         tagActive: 'border border-blue-500 bg-blue-500/100 text-white hover:bg-blue-500/90',
       },
       size: {

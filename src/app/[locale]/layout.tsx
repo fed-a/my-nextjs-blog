@@ -1,5 +1,6 @@
 import { LocaleParams } from '@/types/params';
 
+import { MobileMenu } from '@/components/app';
 import { Footer, Navigation } from '@/components/shared';
 
 import { i18n } from '@/lib/i18n';
@@ -44,6 +45,7 @@ export default async function RootLayout({
             <Navigation locale={locale} />
             <div className="flex-grow">{children}</div>
             <Footer locale={locale} />
+            <MobileMenu />
           </div>
         </Providers>
       </body>

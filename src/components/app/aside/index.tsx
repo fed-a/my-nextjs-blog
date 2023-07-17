@@ -33,12 +33,12 @@ export function MainPageAside(props: Localed<MainPageAsideProps>) {
   const dispatch = useAppDispatch();
 
   return (
-    <>
+    <aside className="flex flex-col order-1 gap-4 md:gap-8 gap border-b-[1px] pl-0 pb-4 border-input md:order-2 md:border-b-0 md:border-l-[1px] md:pl-12 lg:pl-20 xl:pl-28">
       <MainPageFilter locale={locale} difficulty={difficulty} difficulties={difficulties} />
       <MainPageSorting localization={{ sort, publishedAtAsc, publishedAtDesc, popularAsc }} />
-      <Button size="sm" variant="secondary" onClick={() => dispatch(resetMainPageFilters())}>
+      <Button size="sm" variant="outline" onClick={() => dispatch(resetMainPageFilters())}>
         {reset}
       </Button>
-    </>
+    </aside>
   );
 }

@@ -10,7 +10,7 @@ const initialState: MenuSate = {
   isOpen: false,
 };
 
-const menuSlice = createSlice({
+const mobileMenuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
@@ -23,7 +23,7 @@ const menuSlice = createSlice({
   },
 });
 
-export const SelectMenu = (state: RootState) => state.menu;
+export const SelectMobileMenu = (state: RootState) => state.mobileMenu.isOpen;
 
-export const { openMenu, closeMenu } = menuSlice.actions;
-export const menuReducer = menuSlice.reducer;
+export const { openMenu, closeMenu } = mobileMenuSlice.actions;
+export const mobileMenuReducer = mobileMenuSlice.reducer;

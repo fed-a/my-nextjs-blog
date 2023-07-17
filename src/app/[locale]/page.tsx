@@ -37,20 +37,18 @@ export default async function Home({ params }: { params: LocaleParams }) {
             localization={{ read, ago, timeUnits, difficulty, difficulties }}
           />
         </main>
-        <aside className="flex flex-col order-1 gap-12 border-b-[1px] border-black pl-0 dark:border-white md:order-2 md:border-b-0 md:border-l-[1px] md:pl-12 lg:pl-20 xl:pl-28">
-          <MainPageAside
-            localizations={{
-              sort,
-              publishedAtAsc,
-              publishedAtDesc,
-              popularAsc,
-              difficulties,
-              difficulty,
-              reset,
-            }}
-            locale={locale}
-          />
-        </aside>
+        <MainPageAside
+          localizations={{
+            sort,
+            publishedAtAsc,
+            publishedAtDesc,
+            popularAsc,
+            difficulties,
+            difficulty,
+            reset,
+          }}
+          locale={locale}
+        />
       </div>
     </div>
   );

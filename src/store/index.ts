@@ -2,12 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import { appReducer } from './app';
-import { menuReducer } from './menu.slice';
+import { mobileMenuReducer } from './menu.slice';
 
 export const store = configureStore({
   reducer: {
     app: appReducer,
-    menu: menuReducer,
+    mobileMenu: mobileMenuReducer,
   },
 });
 
