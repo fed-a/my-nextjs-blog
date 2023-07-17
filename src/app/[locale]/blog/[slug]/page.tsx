@@ -15,6 +15,8 @@ interface ArticlePageProps {
   params: Localed<{ slug: string }>;
 }
 
+export const revalidate = 60 * 60; // revalidate this page every hour
+
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { locale, slug } = params;
   const [[ago, read], timeUnits] = await Promise.all([
