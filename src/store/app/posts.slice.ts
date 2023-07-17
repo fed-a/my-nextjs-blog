@@ -24,7 +24,9 @@ const initialState: MainPageStore = {
 
 export const getPosts = createAsyncThunk('posts/getPosts', async (locale: Locale, { getState }) => {
   const {
-    mainPageFilter: { tags, difficulty, sorting },
+    app: {
+      filter: { tags, difficulty, sorting },
+    },
   } = getState() as RootState;
 
   if (!locale) {
@@ -67,6 +69,6 @@ const mainPagePostsSlice = createSlice({
   },
 });
 
-export const SelectMainPagePosts = (state: RootState) => state.mainPagePosts;
+export const SelectMainPagePosts = (state: RootState) => state.app.posts;
 
 export const mainPagePostsReducer = mainPagePostsSlice.reducer;

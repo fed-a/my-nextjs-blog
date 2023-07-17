@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import { mainPageFilterReducer, mainPagePostsReducer, mainPageTagsReducer } from './app';
+import { appReducer } from './app';
+import { menuReducer } from './menu.slice';
 
 export const store = configureStore({
   reducer: {
-    mainPageTags: mainPageTagsReducer,
-    mainPageFilter: mainPageFilterReducer,
-    mainPagePosts: mainPagePostsReducer,
+    app: appReducer,
+    menu: menuReducer,
   },
 });
 

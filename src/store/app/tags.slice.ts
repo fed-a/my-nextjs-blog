@@ -51,6 +51,6 @@ const mainPageTagsSlice = createSlice({
   },
 });
 
-export const SelectMainPageTags = (state: RootState) => state.mainPageTags;
+export const SelectMainPageTags = (state: RootState) => state.app.tags;
 
 export const mainPageTagsReducer = mainPageTagsSlice.reducer;

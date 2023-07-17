@@ -32,7 +32,7 @@ const mainPageFilterSlice = createSlice({
   },
 });
 
-export const SelectMainPageFilter = (state: RootState) => state.mainPageFilter;
+export const SelectMainPageFilter = (state: RootState) => state.app.filter;
 
 export const { resetMainPageFilters, toggleTag, setDifficulty, setSorting } =
   mainPageFilterSlice.actions;
