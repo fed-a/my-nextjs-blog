@@ -50,7 +50,9 @@ export function PostCard(props: Localed<PostCardProps>) {
     <article>
       <div className="flex flex-col gap-3">
         <Link href={getLocaledHref(`/blog/${slug}`, locale)} locale={locale}>
-          <h2 className="pb-2 hover:underline text-5xl">{title}</h2>
+          <h2 className="pb-2 hover:underline  text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
+            {title}
+          </h2>
         </Link>
         <div className="flex gap-x-3">
           {tags?.data.map((tag) => (
