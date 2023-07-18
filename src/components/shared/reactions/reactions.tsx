@@ -1,7 +1,7 @@
 'use client';
 
 import anime from 'animejs';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@/components/ui';
 
@@ -45,12 +45,14 @@ export function Reactions({ likes, fires, hearts, tears, angries }: ReactionsPro
     }
   }, [isOpen]);
 
-  function getOnReactionClick(reaction: ReactionVariants) {
-    return () => {
+  const getOnReactionClick = useCallback(
+    (reaction: ReactionVariants) => () => {
       setIsOpen(false);
+      // TODO
       console.log('clicked', reaction, 'from', ip);
-    };
-  }
+    },
+    [],
+  );
 
   return (
     <Popover onOpenChange={setIsOpen} open={isOpen}>

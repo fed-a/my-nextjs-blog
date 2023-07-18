@@ -44,9 +44,7 @@ export function MainPageFilter({ locale, difficulties, difficulty }: MainPageFil
     dispatch(getTags(locale));
   }, [dispatch, locale]);
 
-  function getOnTagClick(tag: string) {
-    return () => dispatch(toggleTag(tag));
-  }
+  const getOnTagClick = useCallback((tag: string) => () => dispatch(toggleTag(tag)), [dispatch]);
 
   const tags = useMemo(
     () =>
