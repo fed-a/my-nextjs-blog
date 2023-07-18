@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { notFound } from 'next/navigation';
 import React from 'react';
 
 import {
@@ -12,14 +12,11 @@ import {
 } from '@/components/app/ui-kit';
 import { Typography } from '@/components/ui';
 
-export const getStaticProps: GetStaticProps = async () => {
-  if (process.env.NODE_ENV !== 'development') {
-    return { notFound: true };
-  }
-  return { props: {} };
-};
-
 export default async function UiKit() {
+  if (process.env.NODE_ENV !== 'development') {
+    notFound();
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <Typography type="h1">Типографика</Typography>

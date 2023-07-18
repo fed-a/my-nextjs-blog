@@ -8,9 +8,13 @@ import { MainPageAside } from '@/components/app/aside';
 import { getLocalization } from '@/lib/i18n';
 import { getDifficulties, getTimeLocalizations } from '@/lib/i18n/utils';
 
-export const metadata: Metadata = {
-  title: 'UI Kit',
-};
+export async function generateMetadata({ params }: { params: LocaleParams }): Promise<Metadata> {
+  const { locale } = params;
+  const [title] = await getLocalization(locale, ['blog.heading']);
+  return {
+    title,
+  };
+}
 
 export default async function Home({ params }: { params: LocaleParams }) {
   const { locale } = params;
