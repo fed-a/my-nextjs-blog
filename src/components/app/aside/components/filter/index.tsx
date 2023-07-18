@@ -1,31 +1,18 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/store';
-import {
-  getTags,
-  SelectMainPageFilter,
-  SelectMainPageTags,
-  setDifficulty,
-  toggleTag,
-} from '@/store/app';
+import { SelectMainPageFilter, setDifficulty } from '@/store/app';
 import { Difficulties } from '@/types';
 import { MainPageFilters } from '@/types/app';
 
-import {
-  Button,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
 
 import { useSSR } from '@/lib/hooks';
 import { Locale } from '@/lib/i18n';
 
-import { SkeletonTags } from './skeleton-tags';
+import { Tags } from './tags';
 
 interface MainPageFilterProps {
   locale: Locale;
@@ -34,26 +21,9 @@ interface MainPageFilterProps {
 }
 
 export function MainPageFilter({ locale, difficulties, difficulty }: MainPageFilterProps) {
-  const { tags: activeTagsStore, difficulty: difficultyStore } =
-    useAppSelector(SelectMainPageFilter);
-  const { tags: tagsStore, status } = useAppSelector(SelectMainPageTags);
+  const { difficulty: difficultyStore } = useAppSelector(SelectMainPageFilter);
   const dispatch = useAppDispatch();
   const { isServer } = useSSR();
-
-  useEffect(() => {
-    dispatch(getTags(locale));
-  }, [dispatch, locale]);
-
-  const getOnTagClick = useCallback((tag: string) => () => dispatch(toggleTag(tag)), [dispatch]);
-
-  const tags = useMemo(
-    () =>
-      tagsStore.map((tag) => ({
-        ...tag,
-        isActive: tag.attributes?.tagId && activeTagsStore.includes(tag.attributes.tagId),
-      })),
-    [activeTagsStore, tagsStore],
-  );
 
   const onDifficultyChange = useCallback(
     (newDifficulty: string) => {
@@ -64,22 +34,7 @@ export function MainPageFilter({ locale, difficulties, difficulty }: MainPageFil
 
   return (
     <div className="flex flex-col gap-12">
-      <div className="flex flex-wrap gap-2">
-        {status === 'success'
-          ? tags?.map((tag) => (
-              <Button
-                disabled={isServer}
-                key={tag.attributes?.tagId}
-                variant={tag.isActive ? 'tagActive' : 'tag'}
-                size="tag"
-                onClick={getOnTagClick(tag.attributes?.tagId ?? '')}
-              >
-                {tag.attributes?.label}
-              </Button>
-            ))
-          : null}
-        {status === 'loading' || !status ? <SkeletonTags /> : null}
-      </div>
+      <Tags locale={locale} />
       <Select
         disabled={isServer}
         value={isServer || !difficultyStore ? undefined : difficultyStore}
