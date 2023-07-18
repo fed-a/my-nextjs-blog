@@ -15,7 +15,7 @@ function MarkdownBlockWrapper({ children }: { children: React.ReactNode }) {
 
 export function MarkdownBlocks({ content }: MarkdownBlocksProps) {
   return (
-    <div className="af-markdown">
+    <div className="flex flex-col gap-8">
       {content?.map((block) => {
         if (isTextBlock(block)) {
           const { id, text } = block;
