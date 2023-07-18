@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@/components/ui';
 
@@ -9,19 +9,21 @@ export function UiKitPopover() {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const blurTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  const onHoverIn = () => {
+  const onHoverIn = useCallback(() => {
     setIsOpen(true);
     if (blurTimeout.current) {
       clearTimeout(blurTimeout.current);
       blurTimeout.current = null;
     }
-  };
-  const onHoverOut = () => {
+  }, []);
+
+  const onHoverOut = useCallback(() => {
     setIsOpen(false);
     blurTimeout.current = setTimeout(() => {
       triggerRef.current?.blur();
     }, 200);
-  };
+  }, []);
+
   return (
     <Popover onOpenChange={setIsOpen} open={isOpen}>
       <PopoverTrigger onMouseEnter={onHoverIn} onMouseLeave={onHoverOut} asChild>

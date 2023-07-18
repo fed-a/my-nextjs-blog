@@ -22,15 +22,6 @@ export function Reactions({ likes, fires, hearts, tears, angries }: ReactionsPro
   const triggerRef = useRef<HTMLButtonElement>(null);
   const reactionsContainerRef = useRef<HTMLDivElement>(null);
   const ip = useUserIp();
-
-  const onHoverIn = () => {
-    setIsOpen(true);
-  };
-
-  const onHoverOut = () => {
-    setIsOpen(false);
-  };
-
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => {
@@ -51,8 +42,16 @@ export function Reactions({ likes, fires, hearts, tears, angries }: ReactionsPro
       // TODO
       console.log('clicked', reaction, 'from', ip);
     },
-    [],
+    [ip],
   );
+
+  const onHoverIn = useCallback(() => {
+    setIsOpen(true);
+  }, []);
+
+  const onHoverOut = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   return (
     <Popover onOpenChange={setIsOpen} open={isOpen}>
