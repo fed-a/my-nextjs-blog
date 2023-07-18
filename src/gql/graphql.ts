@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
@@ -2035,7 +2034,7 @@ export const PostsSlugsDocument = gql`
  */
 export function usePostsSlugsQuery(baseOptions?: Apollo.QueryHookOptions<PostsSlugsQuery, PostsSlugsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return useQuery<PostsSlugsQuery, PostsSlugsQueryVariables>(PostsSlugsDocument, options);
+        return Apollo.useQuery<PostsSlugsQuery, PostsSlugsQueryVariables>(PostsSlugsDocument, options);
       }
 export function usePostsSlugsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsSlugsQuery, PostsSlugsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
@@ -2114,7 +2113,7 @@ export const PostDocument = gql`
  */
 export function usePostQuery(baseOptions?: Apollo.QueryHookOptions<PostQuery, PostQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return useQuery<PostQuery, PostQueryVariables>(PostDocument, options);
+        return Apollo.useQuery<PostQuery, PostQueryVariables>(PostDocument, options);
       }
 export function usePostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostQuery, PostQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
@@ -2183,7 +2182,7 @@ export const PostsDocument = gql`
  */
 export function usePostsQuery(baseOptions?: Apollo.QueryHookOptions<PostsQuery, PostsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return useQuery<PostsQuery, PostsQueryVariables>(PostsDocument, options);
+        return Apollo.useQuery<PostsQuery, PostsQueryVariables>(PostsDocument, options);
       }
 export function usePostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsQuery, PostsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
@@ -2226,7 +2225,7 @@ export const TagsDocument = gql`
  */
 export function useTagsQuery(baseOptions?: Apollo.QueryHookOptions<TagsQuery, TagsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return useQuery<TagsQuery, TagsQueryVariables>(TagsDocument, options);
+        return Apollo.useQuery<TagsQuery, TagsQueryVariables>(TagsDocument, options);
       }
 export function useTagsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TagsQuery, TagsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
@@ -2265,7 +2264,7 @@ export const LocalizationDocument = gql`
  */
 export function useLocalizationQuery(baseOptions?: Apollo.QueryHookOptions<LocalizationQuery, LocalizationQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return useQuery<LocalizationQuery, LocalizationQueryVariables>(LocalizationDocument, options);
+        return Apollo.useQuery<LocalizationQuery, LocalizationQueryVariables>(LocalizationDocument, options);
       }
 export function useLocalizationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LocalizationQuery, LocalizationQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
@@ -2366,7 +2365,7 @@ export const LandingDocument = gql`
  */
 export function useLandingQuery(baseOptions?: Apollo.QueryHookOptions<LandingQuery, LandingQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return useQuery<LandingQuery, LandingQueryVariables>(LandingDocument, options);
+        return Apollo.useQuery<LandingQuery, LandingQueryVariables>(LandingDocument, options);
       }
 export function useLandingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LandingQuery, LandingQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
