@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import { LocaleParams } from '@/types/params';
 
-import { Posts } from '@/components/app';
+import { PostsData } from '@/components/app';
 import { MainPageAside } from '@/components/app/aside';
 
 import { getLocalization } from '@/lib/i18n';
@@ -38,7 +38,7 @@ export default async function Home({ params }: { params: LocaleParams }) {
       <h1>{heading}</h1>
       <div className="my-16 grid grid-cols-1 gap-4 md:grid-cols-[1fr_18rem] md:gap-12 lg:gap-20 xl:gap-28">
         <main className="order-2 flex flex-col gap-16 md:order-1">
-          <Posts
+          <PostsData
             locale={locale}
             localization={{ read, ago, timeUnits, difficulty, difficulties }}
           />
