@@ -4,22 +4,13 @@ import React from 'react';
 
 import { useAppDispatch } from '@/store';
 import { resetMainPageFilters } from '@/store/app';
-import { Difficulties, Localed } from '@/types';
+import { Localed } from '@/types';
+import { MainPageAsideLocalizations } from '@/types/app';
 
 import { Button } from '@/components/ui';
 
 import { MainPageFilter } from './components/filter';
 import { MainPageSorting } from './components/sorting';
-
-interface MainPageAsideLocalizations {
-  sort: string;
-  publishedAtAsc: string;
-  publishedAtDesc: string;
-  popularAsc: string;
-  difficulty: string;
-  difficulties: Difficulties;
-  reset: string;
-}
 
 interface MainPageAsideProps {
   localizations: MainPageAsideLocalizations;

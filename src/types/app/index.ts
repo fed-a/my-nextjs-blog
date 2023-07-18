@@ -1,3 +1,15 @@
+import { Difficulties } from '../localizations';
+
+export interface MainPageAsideLocalizations {
+  sort: string;
+  publishedAtAsc: string;
+  publishedAtDesc: string;
+  popularAsc: string;
+  difficulty: string;
+  difficulties: Difficulties;
+  reset: string;
+}
+
 export const MAIN_PAGE_SORTING: SortingValue[] = [
   {
     id: 'publishedAt:asc',

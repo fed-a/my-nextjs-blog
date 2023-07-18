@@ -1,4 +1,11 @@
 import { PostQueryResult } from '@/gql/graphql';
+import { TimeUnits } from '@/types';
+
+export interface PostContentLocalizations {
+  read: string;
+  timeUnits: TimeUnits;
+  ago: string;
+}
 
 export type PostType = NonNullable<
   NonNullable<NonNullable<PostQueryResult['data']>['posts']>['data'][number]

@@ -1,18 +1,11 @@
 import React, { useMemo } from 'react';
 
-import { Localed, TimeUnits } from '@/types';
+import { Localed } from '@/types';
+import { PostContentLocalizations, PostType } from '@/types/app/blog/[slug]';
 
 import { getLocaledTimeAgo, getLocaledTimeToRead } from '@/lib/utils';
 
-import { PostType } from '../../../../types/app/blog/[slug]';
-
 import { MarkdownBlocks } from './markdown-blocks';
-
-interface PostContentLocalizations {
-  read: string;
-  timeUnits: TimeUnits;
-  ago: string;
-}
 
 interface PostContentProps {
   data: PostType | null;
