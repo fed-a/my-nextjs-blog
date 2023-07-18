@@ -1,5 +1,5 @@
 .af-markdown__code {
-  @apply m-auto w-full overflow-hidden rounded-[0.5rem] shadow;
+  @apply m-auto w-full overflow-hidden rounded-[0.5rem] shadow mt-12;
 }
 
 .code__topbar {

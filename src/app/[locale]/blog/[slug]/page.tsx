@@ -12,8 +12,6 @@ import { fetchAPI } from '@/lib/api';
 import { getLocalization, i18n } from '@/lib/i18n';
 import { getTimeLocalizations } from '@/lib/i18n/utils';
 
-import './blog.css';
-
 interface ArticlePageProps {
   params: Localed<{ slug: string }>;
 }
