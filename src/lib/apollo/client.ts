@@ -2,7 +2,7 @@ import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from '@apollo/clien
 import { onError } from '@apollo/client/link/error';
 import { SSRMultipartLink } from '@apollo/experimental-nextjs-app-support/ssr';
 
-const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_NEXT_PUBLIC_STRAPI_ENDPOINT_GRAPHQL;
+const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_STRAPI_ENDPOINT_GRAPHQL;
 
 let client: ApolloClient<any> | null = null;
 

@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { PostsDocument, PostsQuery, PostsQueryResult, PostsQueryVariables } from '@/gql/graphql';
+import { getPostsApi } from '@/api/posts';
+import { PostsQuery } from '@/gql/graphql';
 import { Localed } from '@/types';
 import { MainPageFilters } from '@/types/app';
 
-import { fetchAPI } from '@/lib/api';
-import { mapPostsParamsToVariables } from '@/lib/app';
 import { Locale } from '@/lib/i18n';
 
 import type { RootState } from '..';
@@ -40,11 +39,7 @@ export const getPosts = createAsyncThunk('posts/getPosts', async (locale: Locale
     locale,
   };
 
-  const result = await fetchAPI<PostsQueryResult, PostsQueryVariables>(
-    PostsDocument,
-    mapPostsParamsToVariables(params),
-  );
-  return result.data?.posts?.data ?? [];
+  return getPostsApi(params);
 });
 
 const mainPagePostsSlice = createSlice({

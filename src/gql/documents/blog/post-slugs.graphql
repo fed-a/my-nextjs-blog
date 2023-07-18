@@ -1,0 +1,10 @@
+query PostsSlugs($locale: I18NLocaleCode) {
+  posts(locale: $locale) {
+    data {
+      id
+      attributes {
+        slug
+      }
+    }
+  }
+}

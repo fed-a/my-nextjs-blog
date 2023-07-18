@@ -1,12 +1,15 @@
+import { Metadata } from 'next';
 import React from 'react';
 
+import { getPostApi } from '@/api/post';
+import { getPostsSlugsApi } from '@/api/posts';
 import { PostDocument, PostQueryResult, PostQueryVariables } from '@/gql/graphql';
 import { Localed } from '@/types/params';
 
 import { PostContent } from '@/components/app/blog/[slug]';
 
 import { fetchAPI } from '@/lib/api';
-import { getLocalization } from '@/lib/i18n';
+import { getLocalization, i18n } from '@/lib/i18n';
 import { getTimeLocalizations } from '@/lib/i18n/utils';
 
 import './blog.css';
@@ -15,7 +18,39 @@ interface ArticlePageProps {
   params: Localed<{ slug: string }>;
 }
 
-export const revalidate = 60 * 60; // revalidate this page every hour
+export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
+  const { locale, slug } = params;
+  // fetch data
+  const article = await getPostApi({ locale, slug });
+
+  const ogLink = `${process.env.NEXT_PUBLIC_HOST}/api/og?title=${encodeURIComponent(
+    article?.attributes?.title ?? '',
+  )}`;
+
+  return {
+    title: article?.attributes?.title,
+    openGraph: {
+      images: [
+        {
+          url: ogLink,
+        },
+      ],
+    },
+  };
+}
+
+export async function generateStaticParams() {
+  const localedSlugs = (await Promise.all(i18n.locales.map(getPostsSlugsApi)))
+    .map((slugs, index) =>
+      slugs.map((slug) => ({
+        locale: i18n.locales[index],
+        slug,
+      })),
+    )
+    .flat();
+
+  return [localedSlugs];
+}
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { locale, slug } = params;
