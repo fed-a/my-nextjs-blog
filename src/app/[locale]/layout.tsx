@@ -40,7 +40,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <link rel="preload" href="/assets/fonts/Unbounded-Bold.woff2" as="font" />
+        <link rel="preload" href="/assets/fonts/Unbounded-Bold.woff2" as="font" type="font/woff2" />
       </head>
       <body>
         <Providers>
