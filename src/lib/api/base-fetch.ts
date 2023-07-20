@@ -1,4 +1,4 @@
-import { OperationVariables, TypedDocumentNode } from '@apollo/client';
+import { FetchPolicy, OperationVariables, TypedDocumentNode } from '@apollo/client';
 
 import { getClient } from '../apollo/client';
 
@@ -9,14 +9,25 @@ import { getClient } from '../apollo/client';
  * @param {Object} options Options passed to fetch
  * @returns Parsed API call response
  */
+
 export async function fetchAPI<
   TData extends { data: any },
   TVariables extends OperationVariables = OperationVariables,
->(query: TypedDocumentNode<TData, TVariables>, variables?: TVariables, client = getClient()) {
+>(
+  query: TypedDocumentNode<TData, TVariables>,
+  variables?: TVariables,
+  fetchOptions: RequestInit = {},
+  fetchPolicy: FetchPolicy = 'cache-first',
+  client = getClient(),
+) {
   return client
     .query<TData['data'], TVariables>({
       query,
       variables,
+      fetchPolicy,
+      context: {
+        fetchOptions,
+      },
     })
     .then((result) => result);
 }

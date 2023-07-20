@@ -21,13 +21,19 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   // fetch data
   const article = await getPostApi({ locale, slug });
 
-  const ogLink = `${process.env.NEXT_PUBLIC_HOST}/api/og?title=${encodeURIComponent(
-    article?.attributes?.title ?? '',
-  )}`;
+  const ogLink = `/api/og?title=${encodeURIComponent(article?.attributes?.title ?? '')}`;
 
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_HOST ?? 'http://localhost:3000'),
     title: article?.attributes?.title,
+    description: article?.attributes?.description,
     openGraph: {
+      type: 'article',
+      locale,
+      title: article?.attributes?.title,
+      description: article?.attributes?.description,
+      siteName: 'Anton Fedulov Blog',
+      url: `${process.env.NEXT_PUBLIC_HOST}/${locale}/blog/${slug}`,
       images: [
         {
           url: ogLink,
@@ -56,14 +62,22 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     getLocalization(locale, ['post.ago', 'post.read']),
     getTimeLocalizations(locale),
   ]);
-  const post = await fetchAPI<PostQueryResult, PostQueryVariables>(PostDocument, {
-    locale,
-    filters: {
-      slug: {
-        eq: slug,
+  const post = await fetchAPI<PostQueryResult, PostQueryVariables>(
+    PostDocument,
+    {
+      locale,
+      filters: {
+        slug: {
+          eq: slug,
+        },
       },
     },
-  }).catch(() => null);
+    {
+      next: {
+        revalidate: 5,
+      },
+    },
+  ).catch(() => null);
 
   const data = post?.data?.posts?.data?.[0]?.attributes ?? null;
 
