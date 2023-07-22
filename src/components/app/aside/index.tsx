@@ -4,22 +4,31 @@ import React from 'react';
 
 import { useAppDispatch } from '@/store';
 import { resetMainPageFilters } from '@/store/app';
-import { Localed } from '@/types';
-import { MainPageAsideLocalizations } from '@/types/app';
+import { Difficulties, Localed } from '@/types';
 
 import { Button } from '@/components/ui';
 
 import { MainPageFilter } from './components/filter';
 import { MainPageSorting } from './components/sorting';
 
+interface MainPageAsideLocalization {
+  sort: string;
+  publishedAtAsc: string;
+  publishedAtDesc: string;
+  popularAsc: string;
+  difficulty: string;
+  difficulties: Difficulties;
+  reset: string;
+}
+
 interface MainPageAsideProps {
-  localizations: MainPageAsideLocalizations;
+  localization: MainPageAsideLocalization;
 }
 
 export function MainPageAside(props: Localed<MainPageAsideProps>) {
-  const { locale, localizations } = props;
+  const { locale, localization } = props;
   const { sort, publishedAtAsc, publishedAtDesc, popularAsc, difficulty, difficulties, reset } =
-    localizations;
+    localization;
 
   const dispatch = useAppDispatch();
 

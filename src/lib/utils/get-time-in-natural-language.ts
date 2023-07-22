@@ -12,6 +12,7 @@ export function getTimeInNaturalLanguage(minutes: number, timeUnits: TimeUnits) 
     return getNumeric({
       zero: timeUnits.yearZero,
       one: timeUnits.yearOne,
+      two: timeUnits.yearTwo,
       few: timeUnits.yearFew,
       many: timeUnits.yearMany,
       other: timeUnits.yearOther,
@@ -22,6 +23,7 @@ export function getTimeInNaturalLanguage(minutes: number, timeUnits: TimeUnits) 
     return getNumeric({
       zero: timeUnits.monthZero,
       one: timeUnits.monthOne,
+      two: timeUnits.monthTwo,
       few: timeUnits.monthFew,
       many: timeUnits.monthMany,
       other: timeUnits.monthOther,
@@ -32,6 +34,7 @@ export function getTimeInNaturalLanguage(minutes: number, timeUnits: TimeUnits) 
     return getNumeric({
       zero: timeUnits.dayZero,
       one: timeUnits.dayOne,
+      two: timeUnits.dayTwo,
       few: timeUnits.dayFew,
       many: timeUnits.dayMany,
       other: timeUnits.dayOther,
@@ -42,6 +45,7 @@ export function getTimeInNaturalLanguage(minutes: number, timeUnits: TimeUnits) 
     return getNumeric({
       zero: timeUnits.hourZero,
       one: timeUnits.hourOne,
+      two: timeUnits.hourTwo,
       few: timeUnits.hourFew,
       many: timeUnits.hourMany,
       other: timeUnits.hourOther,
@@ -51,6 +55,7 @@ export function getTimeInNaturalLanguage(minutes: number, timeUnits: TimeUnits) 
   return getNumeric({
     zero: timeUnits.minuteZero,
     one: timeUnits.minuteOne,
+    two: timeUnits.minuteTwo,
     few: timeUnits.minuteFew,
     many: timeUnits.minuteMany,
     other: timeUnits.minuteOther,

@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import React, { useMemo } from 'react';
 
@@ -8,23 +10,23 @@ import { Localed } from '@/types/params';
 import { Difficulty, DifficultyLocalization, Reactions } from '@/components/shared';
 import { Badge, Icon, Typography } from '@/components/ui';
 
-import { getLocaledHref, getLocaledTimeAgo, getLocaledTimeToRead } from '@/lib/utils';
+import { getLocaledTimeAgo, getLocaledTimeToRead } from '@/lib/utils';
 
-export interface PostCardLocalization {
+export interface PostCardLocalization extends DifficultyLocalization {
   read: string;
   ago: string;
   timeUnits: TimeUnits;
 }
 
 export interface PostCardProps {
-  localization: PostCardLocalization & DifficultyLocalization;
   cardData: NonNullable<
     NonNullable<NonNullable<PostsQueryResult['data']>['posts']>['data'][number]
   >;
+  localization: PostCardLocalization;
 }
 
 export function PostCard(props: Localed<PostCardProps>) {
-  const { locale, localization, cardData } = props;
+  const { locale, cardData, localization } = props;
   const { title, description, slug, tags, difficulty, publishedAt, likes, timeToRead } =
     cardData?.attributes ?? {};
   const {
@@ -49,7 +51,7 @@ export function PostCard(props: Localed<PostCardProps>) {
   return (
     <article>
       <div className="flex flex-col gap-3">
-        <Link href={getLocaledHref(`/blog/${slug}`, locale)} locale={locale}>
+        <Link href={`/blog/${slug}`} locale={locale}>
           <h2 className="pb-2 hover:underline  text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
             {title}
           </h2>
@@ -63,11 +65,11 @@ export function PostCard(props: Localed<PostCardProps>) {
         <div className="flex gap-x-3 flex-col flex-wrap md:flex-row ">
           <div className="flex items-center gap-2">
             <Icon name="calendar" size="medium" color="primary" />
-            <Typography>{localedTimeAgo}</Typography>
+            <Typography>{localedTimeToRead}</Typography>
           </div>
           <div className="flex items-center gap-2">
             <Icon name="clock" size="medium" color="primary" />
-            <Typography>{localedTimeToRead}</Typography>
+            <Typography>{localedTimeAgo}</Typography>
           </div>
           <div className="flex items-center gap-2">
             <Icon name="puzzle" size="medium" color="primary" />

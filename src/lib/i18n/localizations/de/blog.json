@@ -3,9 +3,9 @@
   "sort": "Sortieren",
   "heading": "I.T.-Blog",
   "more": "Mehr anzeigen",
-  "publishedAt:asc": "Alte Erste",
-  "publishedAt:desc": "Neue Erste",
-  "popular:asc": "Beliebter Erster",
+  "publishedAtAsc": "Alte Erste",
+  "publishedAtDesc": "Neue Erste",
+  "popularAsc": "Beliebter Erster",
   "reset": "Zurücksetzen",
   "noPosts": "Keine Beiträge mit bestimmten Filtern"
 }

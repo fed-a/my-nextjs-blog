@@ -3,9 +3,9 @@
   "sort": "Sortering",
   "heading": "I.T.-blogg",
   "more": "Visa mer",
-  "publishedAt:asc": "Gammal först",
-  "publishedAt:desc": "Ny första",
-  "popular:asc": "Populär först",
+  "publishedAtAsc": "Gammal först",
+  "publishedAtDesc": "Ny första",
+  "popularAsc": "Populär först",
   "reset": "Återställ",
   "noPosts": "Inga inlägg med angivna filter"
 }

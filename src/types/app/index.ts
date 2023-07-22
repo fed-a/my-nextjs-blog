@@ -12,26 +12,26 @@ export interface MainPageAsideLocalizations {
 
 export const MAIN_PAGE_SORTING: SortingValue[] = [
   {
-    id: 'publishedAt:asc',
-    value: ['publishedAt:asc'],
+    id: 'publishedAtAsc',
+    value: ['publishedAtAsc'],
   },
   {
-    id: 'publishedAt:desc',
-    value: ['publishedAt:desc'],
+    id: 'publishedAtDesc',
+    value: ['publishedAtDesc'],
   },
   {
-    id: 'pupular:asc',
+    id: 'pupularAsc',
     value: [
-      'reactionLikes:asc',
-      'reactionFires:asc',
-      'reactionHearts:asc',
-      'reactionTears:asc',
-      'reactionAngries:asc',
+      'reactionLikesAsc',
+      'reactionFiresAsc',
+      'reactionHeartsAsc',
+      'reactionTearsAsc',
+      'reactionAngriesAsc',
     ],
   },
 ];
 
-export type MainPageSortings = 'publishedAt:asc' | 'publishedAt:desc' | 'pupular:asc';
+export type MainPageSortings = 'publishedAtAsc' | 'publishedAtDesc' | 'pupularAsc';
 
 export interface MainPageFilters {
   tags: string[];

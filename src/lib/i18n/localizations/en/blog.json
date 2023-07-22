@@ -3,9 +3,9 @@
   "sort": "Sorting",
   "heading": "Blog about I.T. stuff",
   "more": "Show more",
-  "publishedAt:asc": "Old First",
-  "publishedAt:desc": "New first",
-  "popular:asc": "Popular first",
+  "publishedAtAsc": "Old First",
+  "publishedAtDesc": "New first",
+  "popularAsc": "Popular first",
   "reset": "Reset",
   "noPosts": "No posts with specified filters"
 }

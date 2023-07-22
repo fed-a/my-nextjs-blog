@@ -1,19 +1,15 @@
 import { Difficulties } from '@/types';
 
-import { getLocalization, Locale } from '..';
+import { Locale } from '..';
+import { useAppTranslationSSR } from '../use-translation-ssr';
 
 export async function getDifficulties(locale: Locale): Promise<Difficulties> {
-  const [apprentice, adept, expert, master] = await getLocalization(locale, [
-    'difficulty.apprentice',
-    'difficulty.adept',
-    'difficulty.expert',
-    'difficulty.master',
-  ]);
+  const { t } = await useAppTranslationSSR(locale, 'difficulty');
 
   return {
-    apprentice,
-    adept,
-    expert,
-    master,
+    apprentice: t('apprentice'),
+    adept: t('adept'),
+    expert: t('expert'),
+    master: t('master'),
   };
 }

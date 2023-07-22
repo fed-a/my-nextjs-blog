@@ -7,7 +7,7 @@ import type { RootState } from '..';
 const initialState: MainPageFilters = {
   tags: [],
   difficulty: null,
-  sorting: 'publishedAt:desc',
+  sorting: 'publishedAtDesc',
 };
 
 const mainPageFilterSlice = createSlice({

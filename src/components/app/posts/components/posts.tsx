@@ -1,21 +1,19 @@
+'use client';
+
 import React from 'react';
 
 import { useAppSelector } from '@/store';
 import { SelectMainPagePosts } from '@/store/app';
-
-import { DifficultyLocalization } from '@/components/shared';
-
-import { Locale } from '@/lib/i18n';
+import { Localed } from '@/types';
 
 import { PostsLoading } from './loading';
 import { PostCard, PostCardLocalization } from './post-card';
 
 interface PostsProps {
-  locale: Locale;
-  localization: PostCardLocalization & DifficultyLocalization;
+  localization: PostCardLocalization;
 }
 
-export function Posts({ locale, localization }: PostsProps) {
+export function Posts({ locale, localization }: Localed<PostsProps>) {
   const { posts, status, error } = useAppSelector(SelectMainPagePosts);
 
   switch (status) {
@@ -35,7 +33,7 @@ export function Posts({ locale, localization }: PostsProps) {
       return (
         <>
           {posts?.map((post) => (
-            <PostCard key={post.id} locale={locale} localization={localization} cardData={post} />
+            <PostCard key={post.id} locale={locale} cardData={post} localization={localization} />
           ))}
         </>
       );

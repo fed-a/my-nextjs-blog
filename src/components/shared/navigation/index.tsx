@@ -3,17 +3,16 @@ import React from 'react';
 
 import { LocaleParams } from '@/types';
 
-import { getLocalization } from '@/lib/i18n';
+import { useAppTranslationSSR } from '@/lib/i18n/use-translation-ssr';
 import { ROUTES } from '@/lib/routes';
-import { getLocaledHref } from '@/lib/utils';
 
 import { NavigationLink, ThemeToggle } from './components';
 
 export async function Navigation({ locale }: LocaleParams) {
-  const [about, blog] = await getLocalization(locale, ['menu.about', 'menu.blog']);
+  const { t } = await useAppTranslationSSR(locale, 'menu');
   return (
     <header className="container flex items-center justify-between py-16">
-      <Link href={getLocaledHref(ROUTES.blog.route, locale)} locale={locale}>
+      <Link href={ROUTES.blog.route} locale={locale}>
         <div className="inline-block h-10 aspect-[525/400] sm:h-12 md:h-16 bg-[url('/assets/images/logo-light-min.svg')] bg-cover bg-center dark:bg-[url('/assets/images/logo-dark-min.svg')]" />
       </Link>
       <nav className="flex items-center gap-8">
@@ -21,12 +20,12 @@ export async function Navigation({ locale }: LocaleParams) {
         <ul className="flex gap-16">
           <li>
             <NavigationLink href={ROUTES.about.route} locale={locale}>
-              {about}
+              {t('about')}
             </NavigationLink>
           </li>
           <li>
             <NavigationLink href={ROUTES.blog.route} locale={locale}>
-              {blog}
+              {t('blog')}
             </NavigationLink>
           </li>
           {process.env.NODE_ENV === 'development' && (

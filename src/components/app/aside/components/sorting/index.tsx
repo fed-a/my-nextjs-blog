@@ -23,7 +23,7 @@ export function MainPageSorting({ localization }: MainPageSortingProps) {
   const dispatch = useAppDispatch();
   const { sorting } = useAppSelector(SelectMainPageFilter);
   const { isServer } = useSSR();
-  const { sort, publishedAtAsc, publishedAtDesc, popularAsc } = localization;
+  const { sort, publishedAtAsc, publishedAtDesc, popularAsc } = localization ?? {};
 
   const localedOptions = [publishedAtAsc, publishedAtDesc, popularAsc];
 

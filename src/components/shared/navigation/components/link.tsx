@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 
 import { Locale } from '@/lib/i18n';
-import { cn, getLocaledHref } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 interface NavigationLinkProps {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ export function NavigationLink(props: NavigationLinkProps & LinkProps) {
       className={cn('hover:text-primary', {
         'text-primary': isActive,
       })}
-      href={getLocaledHref(href, locale)}
+      href={href}
       locale={locale}
       {...restProps}
     >

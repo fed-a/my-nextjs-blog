@@ -9,7 +9,8 @@ import { Localed } from '@/types/params';
 import { PostContent } from '@/components/app/blog/[slug]';
 
 import { fetchAPI } from '@/lib/api';
-import { getLocalization, i18n } from '@/lib/i18n';
+import { i18n } from '@/lib/i18n';
+import { useAppTranslationSSR } from '@/lib/i18n/use-translation-ssr';
 import { getTimeLocalizations } from '@/lib/i18n/utils';
 
 interface ArticlePageProps {
@@ -58,8 +59,8 @@ export async function generateStaticParams() {
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { locale, slug } = params;
-  const [[ago, read], timeUnits] = await Promise.all([
-    getLocalization(locale, ['post.ago', 'post.read']),
+  const [{ t }, timeUnits] = await Promise.all([
+    useAppTranslationSSR(locale, 'post'),
     getTimeLocalizations(locale),
   ]);
   const post = await fetchAPI<PostQueryResult, PostQueryVariables>(
@@ -83,7 +84,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <div className="container md:px-12 lg:px-28 xl:px-40 2xl:px-48">
-      <PostContent locale={locale} data={data} localizations={{ ago, read, timeUnits }} />
+      <PostContent
+        locale={locale}
+        data={data}
+        localizations={{ ago: t('ago'), read: t('read'), timeUnits }}
+      />
     </div>
   );
 }

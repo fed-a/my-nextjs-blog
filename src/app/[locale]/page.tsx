@@ -5,59 +5,53 @@ import { LocaleParams } from '@/types/params';
 import { PostsData } from '@/components/app';
 import { MainPageAside } from '@/components/app/aside';
 
-import { getLocalization } from '@/lib/i18n';
+import { useAppTranslationSSR } from '@/lib/i18n/use-translation-ssr';
 import { getDifficulties, getTimeLocalizations } from '@/lib/i18n/utils';
 
 export async function generateMetadata({ params }: { params: LocaleParams }): Promise<Metadata> {
   const { locale } = params;
-  const [title] = await getLocalization(locale, ['blog.heading']);
+  const { t } = await useAppTranslationSSR(locale, 'blog');
   return {
-    title,
+    title: t('heading'),
   };
 }
 
 export default async function Home({ params }: { params: LocaleParams }) {
   const { locale } = params;
-  const [
-    [read, ago, difficulty],
-    timeUnits,
-    [sort, heading, publishedAtAsc, publishedAtDesc, popularAsc, reset],
-    difficulties,
-  ] = await Promise.all([
-    getLocalization(locale, ['post.read', 'post.ago', 'post.difficulty']),
+  const [{ t: tBlog }, { t: tPost }, timeUnits, difficulties] = await Promise.all([
+    useAppTranslationSSR(locale, 'blog'),
+    useAppTranslationSSR(locale, 'post'),
     getTimeLocalizations(locale),
-    getLocalization(locale, [
-      'blog.sort',
-      'blog.heading',
-      'blog.publishedAt:asc',
-      'blog.publishedAt:desc',
-      'blog.popular:asc',
-      'blog.reset',
-    ]),
     getDifficulties(locale),
   ]);
 
   return (
     <div className="container">
-      <h1>{heading}</h1>
+      <h1>{tBlog('heading')}</h1>
       <div className="my-16 grid grid-cols-1 gap-4 md:grid-cols-[1fr_18rem] md:gap-12 lg:gap-20 xl:gap-28">
         <main className="order-2 flex flex-col gap-16 md:order-1">
           <PostsData
             locale={locale}
-            localization={{ read, ago, timeUnits, difficulty, difficulties }}
+            localization={{
+              read: tPost('read'),
+              ago: tPost('ago'),
+              difficulty: tPost('difficulty'),
+              difficulties,
+              timeUnits,
+            }}
           />
         </main>
         <MainPageAside
-          localizations={{
-            sort,
-            publishedAtAsc,
-            publishedAtDesc,
-            popularAsc,
-            difficulties,
-            difficulty,
-            reset,
-          }}
           locale={locale}
+          localization={{
+            sort: tBlog('sort'),
+            publishedAtAsc: tBlog('publishedAtAsc'),
+            publishedAtDesc: tBlog('publishedAtDesc'),
+            popularAsc: tBlog('popularAsc'),
+            difficulty: tPost('difficulty'),
+            difficulties,
+            reset: tBlog('reset'),
+          }}
         />
       </div>
     </div>
