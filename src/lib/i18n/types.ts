@@ -49,11 +49,14 @@ const POST_FIELDS = [
   'difficulty',
 ] as const;
 
+const COMMON_FIELDS = ['name'] as const;
+
 const LOCALIZATION_FIELDS = {
   blog: BLOG_FIELDS,
   difficulty: DIFFICULTY_FIELDS,
   menu: MENU_FIELDS,
   post: POST_FIELDS,
+  common: COMMON_FIELDS,
 };
 
 export type LocalizationModules = keyof typeof LOCALIZATION_FIELDS;

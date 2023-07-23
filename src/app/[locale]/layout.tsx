@@ -1,7 +1,7 @@
 import { LocaleParams } from '@/types/params';
 
 import { MobileMenu } from '@/components/app';
-import { Footer } from '@/components/shared';
+import { AppHead, Footer } from '@/components/shared';
 import { Navigation } from '@/components/shared/navigation';
 
 import { i18n } from '@/lib/i18n';
@@ -41,13 +41,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <link
-          rel="preload"
-          href="/assets/fonts/Unbounded-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
+        <AppHead locale={locale} />
       </head>
       <body>
         <Providers>

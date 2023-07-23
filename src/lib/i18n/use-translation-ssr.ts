@@ -23,7 +23,7 @@ const initI18next = async (locale: Locale, ns: LocalizationModules) => {
 // can be used in SSR
 export async function useAppTranslationSSR(
   locale: Locale,
-  ns: LocalizationModules,
+  ns: LocalizationModules = 'common',
   options: any = {},
 ) {
   const i18nextInstance = await initI18next(locale, ns);
