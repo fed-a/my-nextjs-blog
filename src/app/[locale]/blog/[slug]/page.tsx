@@ -17,6 +17,8 @@ interface ArticlePageProps {
   params: Localed<{ slug: string }>;
 }
 
+export const dynamic = 'force-static';
+
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { locale, slug } = params;
   // fetch data

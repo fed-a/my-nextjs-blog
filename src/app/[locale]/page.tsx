@@ -8,6 +8,8 @@ import { MainPageAside } from '@/components/app/aside';
 import { useAppTranslationSSR } from '@/lib/i18n/use-translation-ssr';
 import { getDifficulties, getTimeLocalizations } from '@/lib/i18n/utils';
 
+export const dynamic = 'force-static';
+
 export async function generateMetadata({ params }: { params: LocaleParams }): Promise<Metadata> {
   const { locale } = params;
   const { t } = await useAppTranslationSSR(locale, 'blog');

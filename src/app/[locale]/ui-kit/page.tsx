@@ -12,6 +12,8 @@ import {
 } from '@/components/app/ui-kit';
 import { Typography } from '@/components/ui';
 
+export const dynamic = 'force-static';
+
 export default async function UiKit() {
   if (process.env.NODE_ENV !== 'development') {
     notFound();

@@ -2,27 +2,33 @@
 
 import Link, { LinkProps } from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Locale } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
-interface NavigationLinkProps {
+interface NavigationLinkProps extends LinkProps {
   children: React.ReactNode;
   href: string;
   locale: Locale;
+  serverDefaultPathname: string;
 }
 
-export function NavigationLink(props: NavigationLinkProps & LinkProps) {
-  const { children, href, locale, ...restProps } = props;
-  const pathName = usePathname();
+export function NavigationLink(props: NavigationLinkProps) {
+  const { children, href, locale, serverDefaultPathname, ...restProps } = props;
 
-  const isActive = pathName === href;
+  const [currentPath, setCurrentPath] = useState(serverDefaultPathname);
+  const clientPathname = usePathname();
+
+  useEffect(() => {
+    setCurrentPath(`${clientPathname.split('/').slice(0, 3).join('/')}`);
+  }, [clientPathname]);
 
   return (
     <Link
       className={cn('hover:text-primary', {
-        'text-primary': isActive,
+        'text-primary/100': href === currentPath,
+        'text-primary/70': href !== currentPath,
       })}
       href={href}
       locale={locale}

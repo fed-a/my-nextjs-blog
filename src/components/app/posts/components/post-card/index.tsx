@@ -10,7 +10,7 @@ import { Localed } from '@/types/params';
 import { Difficulty, DifficultyLocalization, Reactions } from '@/components/shared';
 import { Badge, Icon, Typography } from '@/components/ui';
 
-import { getLocaledTimeAgo, getLocaledTimeToRead } from '@/lib/utils';
+import { getLocaledHref, getLocaledTimeAgo, getLocaledTimeToRead } from '@/lib/utils';
 
 export interface PostCardLocalization extends DifficultyLocalization {
   read: string;
@@ -51,7 +51,7 @@ export function PostCard(props: Localed<PostCardProps>) {
   return (
     <article>
       <div className="flex flex-col gap-3">
-        <Link href={`/blog/${slug}`} locale={locale}>
+        <Link href={getLocaledHref(`/blog/${slug}`, locale)} locale={locale}>
           <h2 className="pb-2 hover:underline  text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
             {title}
           </h2>
