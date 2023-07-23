@@ -25,7 +25,7 @@ export function Posts({ locale, localization }: Localed<PostsProps>) {
     hasMore,
   });
 
-  if (status === 'loading' && posts.length === 0) {
+  if ((status === 'loading' || status === null) && posts.length === 0) {
     return <PostsLoading />;
   }
   if (status === 'success' && posts?.length === 0) {
