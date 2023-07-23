@@ -40,25 +40,23 @@ export function PostsData({ locale, localization }: Localed<PostsProps>) {
 
   useEffect(() => {
     if (!isFirstRunRef.current) {
-      console.log('fetch filtered', tags, difficulty, sorting, locale);
       debouncedDispatchPosts(locale);
     }
   }, [tags, difficulty, sorting, locale, debouncedDispatchPosts]);
 
   useEffect(() => {
     if (!isFirstRunRef.current && page > 1) {
-      console.log('fetch next page', page);
       dispatch(getNextPosts(locale));
     }
   }, [page, locale, dispatch]);
 
   useEffect(() => {
-    isFirstRunRef.current = false;
-    if (!dirty) {
+    if (isFirstRunRef.current && !dirty) {
+      isFirstRunRef.current = false;
       dispatch(getPosts(locale));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, locale]);
+  }, [dispatch, dirty, locale]);
 
   return (
     <main className="order-2 flex flex-col gap-16 md:order-1">
