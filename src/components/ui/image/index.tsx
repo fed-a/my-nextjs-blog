@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { getStrapiMedia, getStrapiMediaFormats } from '@/lib/api';
 import { cn } from '@/lib/utils';
@@ -24,6 +24,8 @@ interface BlurImageProps {
 export function FormattedImage(props: BlurImageProps) {
   const { src, alt, width, height, formats, caption } = props;
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const strapiSrc = getStrapiMedia(src);
   const strapiFormats = getStrapiMediaFormats(formats ?? null);
   const sources = generateImageAttributes(strapiFormats ?? null);
@@ -32,6 +34,7 @@ export function FormattedImage(props: BlurImageProps) {
   const pictureContainerRef = useRef<HTMLDivElement>(null);
 
   function show() {
+    setIsLoaded(true);
     if (pictureContainerRef.current?.classList.contains('blur-xl')) {
       pictureContainerRef.current.classList.remove('blur-xl');
     }
@@ -71,7 +74,7 @@ export function FormattedImage(props: BlurImageProps) {
         className="af-img__picture-container w-full bg-cover bg-center bg-no-repeat blur-xl"
         style={{
           aspectRatio: `${width / height}`,
-          backgroundImage: `url(${blurSource})`,
+          backgroundImage: isLoaded ? 'none' : `url(${blurSource})`,
         }}
       >
         <picture suppressHydrationWarning className="opacity-0">
