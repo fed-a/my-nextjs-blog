@@ -1,5 +1,5 @@
 .difficulty_apprentice {
-  @apply text-white dark:text-black;
+  @apply text-black dark:text-white;
 }
 .difficulty_adept {
   @apply text-[#1881EC];
