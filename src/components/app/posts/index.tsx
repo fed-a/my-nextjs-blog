@@ -3,7 +3,13 @@
 import React, { useEffect, useMemo } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/store';
-import { getPosts, resetMainPageFilters, resetPosts, SelectMainPageFilter } from '@/store/app';
+import {
+  getNextPosts,
+  getPosts,
+  resetMainPageFilters,
+  resetPosts,
+  SelectMainPageFilter,
+} from '@/store/app';
 import { Localed } from '@/types/params';
 
 import { Locale } from '@/lib/i18n';
@@ -18,7 +24,7 @@ interface PostsProps {
 
 export function PostsData({ locale, localization }: Localed<PostsProps>) {
   const isFirstRunRef = React.useRef(true);
-  const { page, tags, difficulty, sorting } = useAppSelector(SelectMainPageFilter);
+  const { page, tags, difficulty, sorting, dirty } = useAppSelector(SelectMainPageFilter);
   const dispatch = useAppDispatch();
 
   const debouncedDispatchPosts = useMemo(() => {
@@ -28,19 +34,30 @@ export function PostsData({ locale, localization }: Localed<PostsProps>) {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(resetMainPageFilters());
     dispatch(resetPosts());
+    dispatch(resetMainPageFilters());
   }, [dispatch]);
 
   useEffect(() => {
     if (!isFirstRunRef.current) {
+      console.log('fetch filtered', tags, difficulty, sorting, locale);
       debouncedDispatchPosts(locale);
     }
-  }, [page, tags, difficulty, sorting, locale, debouncedDispatchPosts]);
+  }, [tags, difficulty, sorting, locale, debouncedDispatchPosts]);
+
+  useEffect(() => {
+    if (!isFirstRunRef.current && page > 1) {
+      console.log('fetch next page', page);
+      dispatch(getNextPosts(locale));
+    }
+  }, [page, locale, dispatch]);
 
   useEffect(() => {
     isFirstRunRef.current = false;
-    dispatch(getPosts(locale));
+    if (!dirty) {
+      dispatch(getPosts(locale));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, locale]);
 
   return (

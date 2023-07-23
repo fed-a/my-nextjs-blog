@@ -9,6 +9,7 @@ const initialState: MainPageFilters = {
   tags: [],
   difficulty: null,
   sorting: 'publishedAtDesc',
+  dirty: false,
 };
 
 const mainPageFilterSlice = createSlice({
@@ -23,15 +24,22 @@ const mainPageFilterSlice = createSlice({
       } else {
         state.tags.splice(indexOfTag, 1);
       }
+      state.page = 1;
+      state.dirty = true;
     },
     nextPage: (state) => {
       state.page += 1;
+      state.dirty = true;
     },
     setSorting: (state, action: PayloadAction<MainPageSortings>) => {
       state.sorting = action.payload;
+      state.page = 1;
+      state.dirty = true;
     },
     setDifficulty: (state, action: PayloadAction<MainPageFilters['difficulty']>) => {
       state.difficulty = action.payload;
+      state.page = 1;
+      state.dirty = true;
     },
   },
 });

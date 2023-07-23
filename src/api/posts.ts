@@ -14,7 +14,7 @@ import { mapPostsParamsToVariables } from '@/lib/app';
 import { Locale } from '@/lib/i18n';
 
 export async function getPostsApi(
-  params: Localed<MainPageFilters>,
+  params: Localed<Partial<MainPageFilters>>,
 ): Promise<NonNullable<PostsQueryResult['data']>['posts']> {
   const result = await fetchAPI<PostsQueryResult, PostsQueryVariables>(
     PostsDocument,

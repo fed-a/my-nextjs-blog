@@ -10,9 +10,9 @@ export function mapPostsParamsToVariables({
   tags,
   difficulty,
   sorting,
-}: Localed<MainPageFilters>): PostsQueryVariables {
+}: Localed<Partial<MainPageFilters>>): PostsQueryVariables {
   const and: NonNullable<PostsQueryVariables['filters']>['and'] = [];
-  if (tags.length) {
+  if (tags?.length) {
     and.push({
       tags: {
         tagId: {

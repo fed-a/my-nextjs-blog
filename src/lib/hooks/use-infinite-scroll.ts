@@ -16,8 +16,6 @@ export function useInfiniteScroll({ onLoadMore, hasMore }: Options) {
   });
 
   useEffect(() => {
-    console.log('use effect');
-    console.log(entry, hasMore);
     if (entry?.isIntersecting && hasMore) {
       onLoadMore();
     }

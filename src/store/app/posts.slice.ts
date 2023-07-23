@@ -23,14 +23,14 @@ const initialState: MainPageStore = {
   hasMore: true,
 };
 
-export const getPosts = createAsyncThunk('posts/getPosts', async (locale: Locale, { getState }) => {
+const getPostsFx = async (locale: Locale, { getState }: any) => {
   const {
     app: {
       filter: { page, tags, difficulty, sorting },
     },
   } = getState() as RootState;
 
-  const params: Localed<MainPageFilters> = {
+  const params: Localed<Partial<MainPageFilters>> = {
     page,
     tags,
     difficulty,
@@ -39,7 +39,10 @@ export const getPosts = createAsyncThunk('posts/getPosts', async (locale: Locale
   };
 
   return getPostsApi(params);
-});
+};
+
+export const getPosts = createAsyncThunk('posts/getPosts', getPostsFx);
+export const getNextPosts = createAsyncThunk('posts/getNextPosts', getPostsFx);
 
 const mainPagePostsSlice = createSlice({
   name: 'posts',
@@ -51,20 +54,36 @@ const mainPagePostsSlice = createSlice({
     builder.addCase(getPosts.pending, (state) => {
       state.status = 'loading';
     });
+    builder.addCase(getNextPosts.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(getPosts.rejected, (state, action) => {
+      state.posts = [];
+      state.hasMore = false;
+      state.status = 'error';
+      state.error = action.error.message ?? 'Error while fetching posts';
+    });
+    builder.addCase(getNextPosts.rejected, (state, action) => {
+      state.posts = [];
+      state.hasMore = false;
+      state.status = 'error';
+      state.error = action.error.message ?? 'Error while fetching posts';
+    });
     builder.addCase(getPosts.fulfilled, (state, action) => {
-      const curTotal = state.posts.length + (action.payload?.data?.length ?? 0);
+      const curTotal = action.payload?.data?.length ?? 0;
       const total = action.payload?.meta.pagination.total ?? 0;
-      console.log(curTotal, total);
-      state.posts = [...state.posts, ...(action.payload?.data ?? [])];
+      state.posts = action.payload?.data ?? [];
       state.hasMore = curTotal < total;
       state.status = 'success';
       state.error = '';
     });
-    builder.addCase(getPosts.rejected, (state, action) => {
-      state.posts = [];
-      state.hasMore = true;
-      state.status = 'error';
-      state.error = action.error.message ?? 'Error while fetching posts';
+    builder.addCase(getNextPosts.fulfilled, (state, action) => {
+      const curTotal = state.posts.length + (action.payload?.data?.length ?? 0);
+      const total = action.payload?.meta.pagination.total ?? 0;
+      state.posts = [...state.posts, ...(action.payload?.data ?? [])];
+      state.hasMore = curTotal < total;
+      state.status = 'success';
+      state.error = '';
     });
   },
 });

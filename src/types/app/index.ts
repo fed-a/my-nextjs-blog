@@ -13,20 +13,20 @@ export interface MainPageAsideLocalizations {
 export const MAIN_PAGE_SORTING: SortingValue[] = [
   {
     id: 'publishedAtAsc',
-    value: ['publishedAtAsc'],
+    value: ['publishedAt:asc'],
   },
   {
     id: 'publishedAtDesc',
-    value: ['publishedAtDesc'],
+    value: ['publishedAt:desc'],
   },
   {
     id: 'pupularAsc',
     value: [
-      'reactionLikesAsc',
-      'reactionFiresAsc',
-      'reactionHeartsAsc',
-      'reactionTearsAsc',
-      'reactionAngriesAsc',
+      'reactionLikes:asc',
+      'reactionFires:asc',
+      'reactionHearts:asc',
+      'reactionTears:asc',
+      'reactionAngries:asc',
     ],
   },
 ];
@@ -38,6 +38,7 @@ export interface MainPageFilters {
   tags: string[];
   difficulty: 'apprentice' | 'adept' | 'expert' | 'master' | null;
   sorting: MainPageSortings;
+  dirty: boolean;
 }
 
 interface SortingValue {
