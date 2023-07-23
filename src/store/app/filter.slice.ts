@@ -5,6 +5,7 @@ import { MainPageFilters, MainPageSortings } from '@/types/app';
 import type { RootState } from '..';
 
 const initialState: MainPageFilters = {
+  page: 1,
   tags: [],
   difficulty: null,
   sorting: 'publishedAtDesc',
@@ -23,6 +24,9 @@ const mainPageFilterSlice = createSlice({
         state.tags.splice(indexOfTag, 1);
       }
     },
+    nextPage: (state) => {
+      state.page += 1;
+    },
     setSorting: (state, action: PayloadAction<MainPageSortings>) => {
       state.sorting = action.payload;
     },
@@ -34,6 +38,6 @@ const mainPageFilterSlice = createSlice({
 
 export const SelectMainPageFilter = (state: RootState) => state.app.filter;
 
-export const { resetMainPageFilters, toggleTag, setDifficulty, setSorting } =
+export const { nextPage, resetMainPageFilters, toggleTag, setDifficulty, setSorting } =
   mainPageFilterSlice.actions;
 export const mainPageFilterReducer = mainPageFilterSlice.reducer;

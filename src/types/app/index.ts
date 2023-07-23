@@ -34,6 +34,7 @@ export const MAIN_PAGE_SORTING: SortingValue[] = [
 export type MainPageSortings = 'publishedAtAsc' | 'publishedAtDesc' | 'pupularAsc';
 
 export interface MainPageFilters {
+  page: number;
   tags: string[];
   difficulty: 'apprentice' | 'adept' | 'expert' | 'master' | null;
   sorting: MainPageSortings;

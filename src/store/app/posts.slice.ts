@@ -13,26 +13,25 @@ interface MainPageStore {
   posts: NonNullable<PostsQuery['posts']>['data'];
   status: 'loading' | 'success' | 'error' | null;
   error: string;
+  hasMore: boolean;
 }
 
 const initialState: MainPageStore = {
   posts: [],
   status: null,
   error: '',
+  hasMore: true,
 };
 
 export const getPosts = createAsyncThunk('posts/getPosts', async (locale: Locale, { getState }) => {
   const {
     app: {
-      filter: { tags, difficulty, sorting },
+      filter: { page, tags, difficulty, sorting },
     },
   } = getState() as RootState;
 
-  if (!locale) {
-    return [];
-  }
-
   const params: Localed<MainPageFilters> = {
+    page,
     tags,
     difficulty,
     sorting,
@@ -45,19 +44,25 @@ export const getPosts = createAsyncThunk('posts/getPosts', async (locale: Locale
 const mainPagePostsSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {},
+  reducers: {
+    resetPosts: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addCase(getPosts.pending, (state) => {
-      state.posts = [];
       state.status = 'loading';
     });
     builder.addCase(getPosts.fulfilled, (state, action) => {
-      state.posts = action.payload ?? [];
+      const curTotal = state.posts.length + (action.payload?.data?.length ?? 0);
+      const total = action.payload?.meta.pagination.total ?? 0;
+      console.log(curTotal, total);
+      state.posts = [...state.posts, ...(action.payload?.data ?? [])];
+      state.hasMore = curTotal < total;
       state.status = 'success';
       state.error = '';
     });
     builder.addCase(getPosts.rejected, (state, action) => {
       state.posts = [];
+      state.hasMore = true;
       state.status = 'error';
       state.error = action.error.message ?? 'Error while fetching posts';
     });
@@ -66,4 +71,5 @@ const mainPagePostsSlice = createSlice({
 
 export const SelectMainPagePosts = (state: RootState) => state.app.posts;
 
+export const { resetPosts } = mainPagePostsSlice.actions;
 export const mainPagePostsReducer = mainPagePostsSlice.reducer;

@@ -31,18 +31,17 @@ export default async function Home({ params }: { params: LocaleParams }) {
     <div className="container">
       <h1>{tBlog('heading')}</h1>
       <div className="my-16 grid grid-cols-1 gap-4 md:grid-cols-[1fr_18rem] md:gap-12 lg:gap-20 xl:gap-28">
-        <main className="order-2 flex flex-col gap-16 md:order-1">
-          <PostsData
-            locale={locale}
-            localization={{
-              read: tPost('read'),
-              ago: tPost('ago'),
-              difficulty: tPost('difficulty'),
-              difficulties,
-              timeUnits,
-            }}
-          />
-        </main>
+        <PostsData
+          locale={locale}
+          localization={{
+            read: tPost('read'),
+            ago: tPost('ago'),
+            difficulty: tPost('difficulty'),
+            noPosts: tBlog('noPosts'),
+            difficulties,
+            timeUnits,
+          }}
+        />
         <MainPageAside
           locale={locale}
           localization={{

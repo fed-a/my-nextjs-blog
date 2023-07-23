@@ -1,20 +1,16 @@
 import { PostsQueryVariables } from '@/gql/graphql';
-import { Difficulties } from '@/types';
-import { MAIN_PAGE_SORTING, MainPageSortings } from '@/types/app';
+import { Localed } from '@/types';
+import { MAIN_PAGE_SORTING, MainPageFilters } from '@/types/app';
 
-import { Locale } from '../i18n';
+const DEFAULT_PAGE_SIZE = 10;
 
 export function mapPostsParamsToVariables({
+  page,
   locale,
   tags,
   difficulty,
   sorting,
-}: {
-  locale: Locale;
-  tags: string[];
-  difficulty: keyof Difficulties | null;
-  sorting: MainPageSortings;
-}): PostsQueryVariables {
+}: Localed<MainPageFilters>): PostsQueryVariables {
   const and: NonNullable<PostsQueryVariables['filters']>['and'] = [];
   if (tags.length) {
     and.push({
@@ -29,5 +25,13 @@ export function mapPostsParamsToVariables({
     and.push({ difficulty: { eq: difficulty } });
   }
   const sortingValue = sorting && MAIN_PAGE_SORTING.find(({ id }) => id === sorting)?.value;
-  return { locale, filters: { and }, sort: sortingValue ?? [] };
+  return {
+    locale,
+    pagination: {
+      page: page ?? 0,
+      pageSize: DEFAULT_PAGE_SIZE,
+    },
+    filters: { and },
+    sort: sortingValue ?? [],
+  };
 }

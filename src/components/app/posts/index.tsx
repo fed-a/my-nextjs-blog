@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/store';
-import { getPosts, resetMainPageFilters, SelectMainPageFilter } from '@/store/app';
+import { getPosts, resetMainPageFilters, resetPosts, SelectMainPageFilter } from '@/store/app';
 import { Localed } from '@/types/params';
 
 import { Locale } from '@/lib/i18n';
@@ -18,7 +18,7 @@ interface PostsProps {
 
 export function PostsData({ locale, localization }: Localed<PostsProps>) {
   const isFirstRunRef = React.useRef(true);
-  const { tags, difficulty, sorting } = useAppSelector(SelectMainPageFilter);
+  const { page, tags, difficulty, sorting } = useAppSelector(SelectMainPageFilter);
   const dispatch = useAppDispatch();
 
   const debouncedDispatchPosts = useMemo(() => {
@@ -29,18 +29,23 @@ export function PostsData({ locale, localization }: Localed<PostsProps>) {
 
   useEffect(() => {
     dispatch(resetMainPageFilters());
+    dispatch(resetPosts());
   }, [dispatch]);
 
   useEffect(() => {
     if (!isFirstRunRef.current) {
       debouncedDispatchPosts(locale);
     }
-  }, [tags, difficulty, sorting, locale, debouncedDispatchPosts]);
+  }, [page, tags, difficulty, sorting, locale, debouncedDispatchPosts]);
 
   useEffect(() => {
     isFirstRunRef.current = false;
     dispatch(getPosts(locale));
   }, [dispatch, locale]);
 
-  return <Posts locale={locale} localization={localization} />;
+  return (
+    <main className="order-2 flex flex-col gap-16 md:order-1">
+      <Posts locale={locale} localization={localization} />
+    </main>
+  );
 }

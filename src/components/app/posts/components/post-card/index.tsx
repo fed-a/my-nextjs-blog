@@ -16,6 +16,7 @@ export interface PostCardLocalization extends DifficultyLocalization {
   read: string;
   ago: string;
   timeUnits: TimeUnits;
+  noPosts: string;
 }
 
 export interface PostCardProps {
@@ -25,7 +26,7 @@ export interface PostCardProps {
   localization: PostCardLocalization;
 }
 
-export function PostCard(props: Localed<PostCardProps>) {
+const PostCardComponent = React.forwardRef<HTMLElement, Localed<PostCardProps>>((props, ref) => {
   const { locale, cardData, localization } = props;
   const { title, description, slug, tags, difficulty, publishedAt, likes, timeToRead } =
     cardData?.attributes ?? {};
@@ -49,7 +50,7 @@ export function PostCard(props: Localed<PostCardProps>) {
   );
 
   return (
-    <article>
+    <article ref={ref}>
       <div className="flex flex-col gap-3">
         <Link href={getLocaledHref(`/blog/${slug}`, locale)} locale={locale}>
           <h2 className="pb-2 hover:underline  text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
@@ -88,4 +89,8 @@ export function PostCard(props: Localed<PostCardProps>) {
       </div>
     </article>
   );
-}
+});
+
+PostCardComponent.displayName = 'PostCard';
+
+export const PostCard = React.memo(PostCardComponent);

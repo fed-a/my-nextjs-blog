@@ -1968,7 +1968,7 @@ export type PostsQueryVariables = Exact<{
 }>;
 
 
-export type PostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, metaTitle: string, slug: string, locale?: string | null, timeToRead: number, publishedAt?: any | null, difficulty: Enum_Post_Difficulty, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, formats?: any | null, url: string, width?: number | null, height?: number | null } | null } | null } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', id?: string | null, attributes?: { __typename?: 'Tag', tagId: string, label: string } | null }> } | null, likes?: { __typename?: 'LikesResponse', likes: number, fires: number, hearts: number, tears: number, angries: number } | null } | null }> } | null };
+export type PostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, metaTitle: string, slug: string, locale?: string | null, timeToRead: number, publishedAt?: any | null, difficulty: Enum_Post_Difficulty, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, formats?: any | null, url: string, width?: number | null, height?: number | null } | null } | null } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', id?: string | null, attributes?: { __typename?: 'Tag', tagId: string, label: string } | null }> } | null, likes?: { __typename?: 'LikesResponse', likes: number, fires: number, hearts: number, tears: number, angries: number } | null } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number } } } | null };
 
 export type TagsQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
@@ -2155,6 +2155,11 @@ export const PostsDocument = gql`
           tears
           angries
         }
+      }
+    }
+    meta {
+      pagination {
+        total
       }
     }
   }
