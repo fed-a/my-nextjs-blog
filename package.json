@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.17",
-    "@apollo/experimental-nextjs-app-support": "^0.0.0-commit-473354a",
     "@mantine/hooks": "^6.0.17",
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-dialog": "^1.0.4",
