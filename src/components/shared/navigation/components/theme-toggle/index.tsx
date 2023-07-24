@@ -16,7 +16,7 @@ export function ThemeToggle() {
 
   return (
     <Button
-      variant="secondary"
+      variant="ghost"
       onClick={onThemeChange}
       className="inline-block h-9 w-9 p-2"
       aria-label="Color theme"

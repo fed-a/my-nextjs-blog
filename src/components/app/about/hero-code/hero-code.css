@@ -1,0 +1,13 @@
+.af-typewriter .Typewriter__cursor {
+  font-weight: 900;
+}
+
+.af-typewriter .Typewriter__wrapper {
+  position: relative;
+}
+.af-typewriter .Typewriter__wrapper::before {
+  right: calc(100% + 0.5rem);
+  top: -1px;
+  content: '>';
+  @apply absolute text-blue-500 font-bold;
+}

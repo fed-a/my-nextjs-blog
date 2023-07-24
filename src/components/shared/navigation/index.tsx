@@ -19,7 +19,7 @@ export async function Navigation({ locale }: LocaleParams) {
   const serverDefaultPathname = `/${locale}${pathname ? `/${pathname}` : ''}`;
 
   return (
-    <header className="container flex items-center justify-between py-16">
+    <header className="container flex items-center justify-between h-32 md:h-48">
       <Link href={getLocaledHref(ROUTES.blog.route, locale)} locale={locale}>
         <div className="inline-block h-10 aspect-[525/400] sm:h-12 md:h-16 bg-[url('/assets/images/logo-light-min.svg')] bg-cover bg-center dark:bg-[url('/assets/images/logo-dark-min.svg')]" />
       </Link>

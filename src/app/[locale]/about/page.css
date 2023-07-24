@@ -1,0 +1,22 @@
+.landing__hero-bg {
+  @apply absolute left-0 top-0 right-0 min-h-[100lvh] -z-50 pointer-events-none;
+  background: radial-gradient(
+    61.43% 99.03% at 100% 0%,
+    rgba(72, 6, 255, 0.22) 0%,
+    rgba(72, 6, 255, 0.1) 23.96%,
+    rgba(72, 6, 255, 0.08) 52.08%,
+    rgba(72, 6, 255, 0.02) 74.48%,
+    rgba(66, 0, 245, 0) 100%
+  );
+}
+
+.dark .landing__hero-bg {
+  background: radial-gradient(
+    61.43% 99.03% at 100% 0%,
+    rgba(72, 6, 255, 0.56) 0%,
+    rgba(71, 5, 253, 0.28) 23.96%,
+    rgba(69, 3, 250, 0.12) 52.08%,
+    rgba(67, 1, 247, 0.04) 74.48%,
+    rgba(66, 0, 245, 0) 100%
+  );
+}

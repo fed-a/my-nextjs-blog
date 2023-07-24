@@ -58,7 +58,9 @@ module.exports = {
       full: '9999px',
     },
     boxShadow: {
-      DEFAULT: '0px 3px 10px 0px #0B5BF4',
+      DEFAULT:
+        '-1px 1px 6px 0px rgba(61, 64, 82, 0.09), -4px 4px 18px 0px rgba(61, 64, 82, 0.14), -16px 16px 80px 0px rgba(61, 64, 82, 0.23);',
+      button: '0px 3px 10px 0px #0B5BF4',
     },
     extend: {
       colors: {
@@ -97,6 +99,9 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+      },
+      borderRadius: {
+        xl: '1rem',
       },
       keyframes: {
         'accordion-down': {
