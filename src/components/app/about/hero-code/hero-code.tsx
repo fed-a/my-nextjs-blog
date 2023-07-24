@@ -15,7 +15,7 @@ import './hero-code.css';
 
 export function HeroCode() {
   return (
-    <div className="w-100% h-[26rem] rounded-xl bg-gray-300/50 dark:bg-gray-700/60 font-['FiraCode',_'Courier_New'] text-[0.7rem] lg:text-sm p-4 pl-8 lg:p-6 lg:pl-12 shadow af-typewriter">
+    <div className="w-100% h-[26rem] rounded-xl bg-gray-300/50 dark:bg-gray-700/60 font-['FiraCode',_'Courier_New'] text-[0.5rem] sm:text-[0.6rem] md:text-[0.75rem] lg:text-sm p-4 pl-8 lg:p-6 lg:pl-12 shadow af-typewriter">
       <Typewriter
         onInit={(typewriter) => {
           typewriter
